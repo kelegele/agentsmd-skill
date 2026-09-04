@@ -39,7 +39,15 @@ agentsmd/
 
 3. 确认导入后，在【技能管理】中确认已启用，新开对话即生效。
 
-### 方式二：本地导入
+### 方式二：npx skills 一键安装
+
+```bash
+npx skills add kelegele/agentsmd-skill
+```
+
+在交互中选择目标 agent（安装到全局 `~/.agents/skills/` 或项目级目录）。
+
+### 方式三：本地导入
 
 ```bash
 git clone https://github.com/kelegele/agentsmd-skill.git
@@ -50,5 +58,7 @@ git clone https://github.com/kelegele/agentsmd-skill.git
 ```bash
 cp -r agentsmd-skill ~/.workbuddy/skills/
 ```
+
+> 注：若 `npx skills` 未列出 WorkBuddy，可用方式一/三安装，或把技能目录复制到 `~/.workbuddy/skills/`。
 
 安装后无需重启，对话中直接说"**用 agentsmd 把这次的教训固化进 AGENTS.md**"即可触发。
