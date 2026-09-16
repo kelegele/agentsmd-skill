@@ -1,6 +1,6 @@
 # agentsmd
 
-将项目经验教训精炼固化为 [AGENTS.md](https://agents.md/) 的 WorkBuddy Skill。
+将项目经验教训精炼固化为 [AGENTS.md](https://agents.md/) 的 Agent Skill（Agent Skills 开放格式，兼容 Claude Code、Codex、Cursor、Gemini CLI、OpenCode、WorkBuddy 等所有支持 skills 的 agent）。
 
 ## 特性
 
@@ -22,43 +22,50 @@ agentsmd/
 
 ## 使用
 
-在 WorkBuddy 中说：
+在任意已安装本技能的 agent（Claude Code、Codex、Cursor、WorkBuddy 等）中说：
 
 > 用 agentsmd 把这次的教训固化进 AGENTS.md
 
 ## 安装
 
-### 方式一：URL 导入（推荐）
-
-1. 打开 WorkBuddy 左侧栏 **技能** → **添加技能**；
-2. 选择 **通过 URL 导入**，粘贴本仓库地址：
-
-   ```
-   https://github.com/kelegele/agentsmd-skill
-   ```
-
-3. 确认导入后，在【技能管理】中确认已启用，新开对话即生效。
-
-### 方式二：npx skills 一键安装
+### 方式一：npx skills 一键安装（推荐，通用）
 
 ```bash
 npx skills add kelegele/agentsmd-skill
 ```
 
-在交互中选择目标 agent（安装到全局 `~/.agents/skills/` 或项目级目录）。
+在交互中选择目标 agent（Claude Code / Codex / Cursor / Gemini CLI 等），可选全局或项目级安装。
 
-### 方式三：本地导入
+### 方式二：Claude Code
+
+```bash
+# 全局（所有项目可用）
+git clone https://github.com/kelegele/agentsmd-skill.git ~/.claude/skills/agentsmd
+
+# 或仅当前项目
+git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
+```
+
+### 方式三：手动复制（任意 agent）
+
+把仓库目录复制到目标 agent 的技能目录即可，技能目录名须为 `agentsmd`：
+
+| Agent | 全局技能目录 |
+|---|---|
+| Claude Code | `~/.claude/skills/` |
+| Codex | `~/.codex/skills/` |
+| 跨 agent 通用 | `~/.agents/skills/` |
+| WorkBuddy | `~/.workbuddy/skills/` |
 
 ```bash
 git clone https://github.com/kelegele/agentsmd-skill.git
+cp -r agentsmd-skill ~/.agents/skills/agentsmd   # 换成目标 agent 的目录
 ```
 
-然后在 WorkBuddy 中选择 **从本地路径导入**，指定克隆目录；或直接复制到技能目录：
+### 方式四：WorkBuddy URL 导入
 
-```bash
-cp -r agentsmd-skill ~/.workbuddy/skills/
-```
+1. 打开 WorkBuddy 左侧栏 **技能** → **添加技能**；
+2. 选择 **通过 URL 导入**，粘贴本仓库地址：`https://github.com/kelegele/agentsmd-skill`；
+3. 确认导入后，在【技能管理】中确认已启用。
 
-> 注：若 `npx skills` 未列出 WorkBuddy，可用方式一/三安装，或把技能目录复制到 `~/.workbuddy/skills/`。
-
-安装后无需重启，对话中直接说"**用 agentsmd 把这次的教训固化进 AGENTS.md**"即可触发。
+> 注：部分 agent 需重启或新开对话才能加载新技能。安装后在对话中说"**用 agentsmd 把这次的教训固化进 AGENTS.md**"即可触发。
