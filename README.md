@@ -8,12 +8,13 @@
 - **合规**：遵循 agents.md 开源规范，采用社区高频章节，仅放全局适用内容
 - **不膨胀**：硬上限 120 行；合并决策表（等价丢弃 / 重叠合并 / 特例泛化 / 矛盾取新 / 过时删除），禁止追加式增长
 - **自适应初始化**：项目无 AGENTS.md 时，扫描项目结构与构建配置后按实际生成，不堆通用常识
+- **文档归集**：收尾时发现散落的产出文档，给出 `docs/` 归类方案；经用户批准才移动文件，并自动修复引用断链
 
 ## 结构
 
 ```
 agentsmd/
-├── SKILL.md                     # 核心工作流（5 步）
+├── SKILL.md                     # 核心工作流（6 步）
 ├── references/
 │   └── agents-md-spec.md        # agents.md 规范要点摘要
 └── assets/
@@ -25,6 +26,10 @@ agentsmd/
 在任意已安装本技能的 agent（Claude Code、Codex、Cursor、WorkBuddy 等）中说：
 
 > 用 agentsmd 把这次的教训固化进 AGENTS.md
+
+顺带整理散落文档时说：
+
+> 用 agentsmd 把这次的教训固化进 AGENTS.md，并把项目里散落的文档归集到 docs/
 
 ## 安装
 
