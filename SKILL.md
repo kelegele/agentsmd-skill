@@ -1,5 +1,6 @@
 ---
 name: agentsmd
+version: 1.1.0
 description: 将项目经验教训精炼固化为 AGENTS.md（或更新已有 AGENTS.md），并可同步项目记忆与进度/状态记录、归集散落文档到 docs/。当用户说"总结经验/教训写进 AGENTS.md"、"把这次踩的坑固化成项目规则"、"更新项目规范"、"整理项目文档"、"文档归档到 docs"等时使用。所有文件改动均须先经用户确认。产出严格遵循 agents.md 开源规范，强制精简、去重、有机合并，防止规则文件无限膨胀。
 agent_created: true
 ---
