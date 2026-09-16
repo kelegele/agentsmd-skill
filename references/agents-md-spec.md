@@ -19,6 +19,8 @@ AGENTS.md 是写给 AI coding agent 的"README"：一个专门的、可预测的
    - `## Code Style`
    - `## Testing Instructions`
    - `## PR Instructions`
+
+   高频可选章节（项目确有对应固定流程时才写）：`## Build & Deployment`、`## Security Notes`、`## Debugging & Troubleshooting`。
 6. **写法风格**（来自官方 minimal example）：
    - 祈使句、以 `- ` 列表项为主
    - 命令直接给完整可执行形式（含包管理器前缀）
@@ -32,5 +34,6 @@ AGENTS.md 已被多家主流 coding agent（Codex、Cursor、Copilot 等）原�
 ## 对本 Skill 的约束映射
 
 - 精简 → 每条一行祈使句，总行数 ≤ 120
-- 合规 → 章节名沿用社区高频章节，仅放全局适用内容
+- 合规 → 章节名沿用社区高频章节（标准 + 可选），仅放全局适用内容
 - 不膨胀 → 嵌套机制说明：若某教训只适用于子目录，提示用户考虑在该子目录放局部 AGENTS.md，而不是撑大根文件
+- 可验证 → 首版写入的命令须实跑确认，或与构建/CI 配置逐一核对（见 SKILL.md Step 3）

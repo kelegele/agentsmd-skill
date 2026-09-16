@@ -2,6 +2,20 @@
 
 版本号：vMAJOR.MINOR.PATCH。MINOR 功能新增、PATCH 修订、MAJOR 架构级变更。
 
+## v1.2.0 - 2026-09-16
+
+### Added
+
+- 成稿示例 `assets/AGENTS-example.md`（agents.md 官方 pnpm/Turborepo monorepo 实例），供把握合格成稿的颗粒度与密度
+- 模板与章节约定扩展可选章节：`Build & Deployment`、`Security Notes`、`Debugging & Troubleshooting`，仅当项目确有对应固定流程时追加
+- Step 3 命令可执行验证：首版写入的每条命令须实跑确认，或与 package.json scripts / Makefile / CI 配置逐一核对，跑不通不写入
+- 章节约定新增嵌套指引：仅适用特定子目录的教训不进根文件，下沉为该子目录的局部 AGENTS.md
+- 模板顶部补充裁剪与语言约定说明（章节名保留英文，条目语言随项目主流语言）
+
+### Changed
+
+- 自建章节门槛修正为"标准与可选章节均无法覆盖时才自建，全文章节总数 ≤ 9"（原"≤ 6"与 6 个标准章节自相矛盾）
+
 ## v1.1.0 - 2026-09-16
 
 ### Added

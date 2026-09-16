@@ -1,6 +1,6 @@
 ---
 name: agentsmd
-version: 1.1.0
+version: 1.2.0
 description: 将项目经验教训精炼固化为 AGENTS.md（或更新已有 AGENTS.md），并可同步项目记忆与进度/状态记录、归集散落文档到 docs/。当用户说"总结经验/教训写进 AGENTS.md"、"把这次踩的坑固化成项目规则"、"更新项目规范"、"整理项目文档"、"文档归档到 docs"等时使用。所有文件改动均须先经用户确认。产出严格遵循 agents.md 开源规范，强制精简、去重、有机合并，防止规则文件无限膨胀。
 agent_created: true
 ---
@@ -35,7 +35,7 @@ agent_created: true
 
 1. **泛化**：把具体案例提升为通用规则。"tsconfig.json 里 paths 别名配错导致 build 失败" → "修改路径别名后必须运行 `npm run build` 验证"。
 2. **压缩**：一条规则一行，格式为 `- 做什么（必要时附原因，原因不超过半行）`。例：`- 提交前必须通过 lint 和 test；CI 会拦截不合规提交`。
-3. **分类**：归入最贴近的章节（见模板）。若无法归入任何标准章节，才新建章节——且整份文件章节总数不超过 6 个。
+3. **分类**：归入最贴近的章节（见模板的标准与可选章节）。均无法覆盖时才自建章节，且整份文件章节总数不超过 9 个。
 
 **准入门槛**：一条规则必须同时满足——(a) 未来大概率再遇到；(b) 违反会导致实际损失（返工/bug/时间浪费）；(c) 一行能说清。三者缺一，丢弃。
 
@@ -45,8 +45,9 @@ agent_created: true
 - **已有**：通读全文，建立现有规则清单（逐条列出）。
 - **没有**：先自行初始化对该项目的认知，再生成 AGENTS.md：
   1. 扫描项目结构、README、构建/依赖配置（package.json / pyproject.toml / Makefile / *.csproj 等）、CI 配置，识别技术栈、包管理器、构建与测试命令。
-  2. 结合本次会话已积累的经验教训，按 agents.md 规范生成首版 AGENTS.md（参考 `assets/AGENTS-template.md`，但章节应贴合该项目实际，标准章节不适用的直接省略，不要留占位空条）。
-  3. 首版同样执行 Step 2 的准入门槛与精简要求，禁止为了"看起来完整"堆砌通用常识。
+  2. 结合本次会话已积累的经验教训，按 agents.md 规范生成首版 AGENTS.md（骨架参考 `assets/AGENTS-template.md`，成稿颗粒度参考 `assets/AGENTS-example.md`；章节应贴合该项目实际，标准与可选章节不适用的直接省略，不要留占位空条）。
+  3. **命令可执行验证**：首版写入的每条命令必须逐条验证——能实际运行的（build / test / lint 等）实跑确认；不便实跑的（如部署、迁移命令）与 package.json scripts / Makefile / CI 配置逐一核对，确认存在且拼写一致。跑不通、核对不上的命令不得写入。
+  4. 首版同样执行 Step 2 的准入门槛与精简要求，禁止为了"看起来完整"堆砌通用常识。
 
 ### Step 4 有机合并（核心）
 
@@ -96,7 +97,16 @@ AGENTS.md 写完后，检查项目中是否有散落的产出文档（MD/HTML/PP
 - 工作流约束（提交、PR、分支） → `PR / Workflow Instructions`
 - 该项目特有的、反复出现的坑 → `Project-Specific Gotchas`
 
+可选章节仅在项目确有对应固定流程时使用，同样执行准入门槛，宁缺毋滥：
+
+- 构建/发布产物、环境配置、部署命令、CI/CD 流程 → `Build & Deployment`
+- 密钥管理、权限模型、安全测试要求 → `Security Notes`
+- 高频报错排查路径、日志位置、调试入口 → `Debugging & Troubleshooting`
+
+**嵌套**：某条教训只适用于特定子目录时，不写入根文件——提示用户在该子目录单放局部 AGENTS.md（agent 处理该目录文件时以更近者为准），根文件只留全局适用内容。
+
 ## 参考资源
 
 - `references/agents-md-spec.md` — agents.md 规范要点摘要，首次为某项目创建 AGENTS.md 前必读。
 - `assets/AGENTS-template.md` — 章节结构参考骨架，生成首版时可参考，但须按项目实际裁剪，不得保留不适用的空章节。
+- `assets/AGENTS-example.md` — agents.md 官方真实成稿示例（pnpm/Turborepo monorepo），用于把握合格成稿的颗粒度与密度。
