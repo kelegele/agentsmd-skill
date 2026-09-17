@@ -77,4 +77,18 @@ cp -r agentsmd-skill ~/.agents/skills/agentsmd   # 换成目标 agent 的目录
 2. 选择 **通过 URL 导入**，粘贴本仓库地址：`https://github.com/kelegele/agentsmd-skill`；
 3. 确认导入后，在【技能管理】中确认已启用。
 
+### 方式五：把 prompt 发给 Agent，由它代办安装
+
+不想动手，直接把下面这段话发给任意支持 skills 的 Agent（Claude Code / Codex / Cursor 等）：
+
+```text
+请帮我安装 agentsmd 技能：
+git clone https://github.com/kelegele/agentsmd-skill.git
+然后把仓库目录完整复制到我的技能目录，目录名保持 agentsmd。
+我的 agent 是 <Claude Code / Codex / Cursor / 其他>，请装到对应位置
+（Claude Code 全局为 ~/.claude/skills/agentsmd，Codex 为 ~/.codex/skills/agentsmd，
+跨 agent 通用为 ~/.agents/skills/agentsmd）。
+装完告诉我怎么触发它。
+```
+
 > 注：部分 agent 需重启或新开对话才能加载新技能。安装后在对话中说"**用 agentsmd 把这次的教训固化进 AGENTS.md**"即可触发。
