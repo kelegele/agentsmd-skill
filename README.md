@@ -1,19 +1,132 @@
 # agentsmd
 
-将项目经验教训精炼固化为 [AGENTS.md](https://agents.md/) 的 Agent Skill（Agent Skills 开放格式，兼容 Claude Code、Codex、Cursor、Gemini CLI、OpenCode、WorkBuddy 等所有支持 skills 的 agent）。
+**你踩过的坑，AI 不再踩第二遍。**
 
-## 特性
+[![GitHub stars](https://img.shields.io/github/stars/kelegele/agentsmd-skill?style=flat-square)](https://github.com/kelegele/agentsmd-skill/stargazers)
+![Agent Skill](https://img.shields.io/badge/格式-Agent_Skills-blue?style=flat-square)
+![Claude Code](https://img.shields.io/badge/支持-Claude_Code-purple?style=flat-square)
+![Codex](https://img.shields.io/badge/支持-Codex-black?style=flat-square)
+![Cursor](https://img.shields.io/badge/支持-Cursor-gray?style=flat-square)
 
-- **精简**：每条规则一行祈使句，设准入门槛（可复用 + 有实际损失 + 一行说得清）
-- **合规**：遵循 agents.md 开源规范，采用社区高频章节，仅放全局适用内容
-- **不膨胀**：硬上限 120 行；合并决策表（等价丢弃 / 重叠合并 / 特例泛化 / 矛盾取新 / 过时删除），禁止追加式增长；瘦身时仍有参考价值的内容迁 `docs/` 并按需一行引用，知识不丢
-- **自适应初始化**：项目无 AGENTS.md 时，扫描项目结构与构建配置后按实际生成，不堆通用常识；每条命令实跑或对照构建/CI 配置核验，跑不通不写入
-- **成稿基准**：附 agents.md 官方真实成稿示例把握颗粒度；模板含可选章节（Build & Deployment / Security Notes / Debugging & Troubleshooting），按项目实际追加，子目录专属教训下沉为局部 AGENTS.md
-- **文档归集**：收尾时发现散落的产出文档，给出 `docs/` 归类方案；经用户批准才移动文件，并自动修复引用断链
-- **记忆与进度同步**：agent 有记忆机制则同步沉淀为项目记忆；项目有进度/状态文件（TODO/CHANGELOG 等）则一并更新
-- **先确认后落盘**：所有文件改动（含 AGENTS.md 本身）先出方案、经用户批准后才执行
+把这次会话里踩的坑、纠正过的错交给 AI，说一句「把教训固化进 AGENTS.md」，它会把它们蒸馏成一行行可执行的规矩，写进项目根目录的 AGENTS.md。此后每个新会话——无论 Claude Code、Codex 还是 Cursor——开工前自动读取，照办。
 
-## 结构
+> 这个 skill 来自我自己一次次重复的「调教」。每次开发，总有一些东西想固化下来：这个项目怎么构建、哪些边界不能碰、代码要守什么规范。它们不写进 AGENTS.md，就得每次开新会话重新教一遍 agent——同样的错它犯三遍，我纠正三遍，时间全耗在这上面。
+>
+> 后来成了习惯：每当有通用的规范或规则要存，我就让 agent 写进 AGENTS.md。日子久了又冒出新麻烦——文件一攒就攒成常识大全，越写越肥，肥到最后连真正的规矩都被淹没在里面。
+>
+> 于是我想到：固化这件事本身，为什么不交给 skill？从此我只要说一句「把这次的教训固化进 AGENTS.md」，收集、蒸馏、合并、核验它全包，我只负责批准。然后，就有了这个 skill。
+
+## 30 秒开始
+
+```bash
+npx skills add kelegele/agentsmd-skill
+```
+
+装好后，对 AI 说：
+
+> 用 agentsmd 把这次的教训固化进 AGENTS.md
+
+不想动手装？直接把仓库地址发给你的 agent：
+
+> 帮我安装这个 skill：https://github.com/kelegele/agentsmd-skill ，装好后告诉我怎么用。
+
+## 它能帮你做什么？
+
+| 你手里的东西 | 它会怎么处理 |
+|---|---|
+| 这次会话踩的坑、纠正过的错、重复过的偏好 | 过三关准入（会再遇到 + 违反有实际损失 + 一行说得清），泛化成通用规则、压成一行祈使句写入 AGENTS.md |
+| 一份越写越肥的 AGENTS.md | 五道合并闸门：等价丢弃 / 重叠合并 / 特例泛化 / 矛盾取新 / 过时删除，禁止无条件追加 |
+| 接近 120 行上限 | 仍有价值的内容迁 `docs/<主题>.md`，原位留一行引用——删的是冗余，不是记忆 |
+| 一个还没有 AGENTS.md 的新项目 | 扫描目录结构、README 与构建/CI 配置按实际生成；每条命令实跑或逐一核对，跑不通的不写入 |
+| 只属于某个子目录的教训 | 下沉为该子目录的局部 AGENTS.md，根文件只留全局适用内容 |
+| 散落在根目录的产出文档 | 只列清单出方案，批准后归入 `docs/<主题>/`，同步修复所有引用断链 |
+| agent 项目记忆、TODO / CHANGELOG | 同步沉淀为项目记忆、更新进度文件（先查重，同样先批准） |
+
+## 为什么不是「让 AI 自己写一份」？
+
+每个新会话 AI 都从零开始：你纠正过的错它今天照犯，教训散落在几十个会话记录里，换会话、换工具全部蒸发。让它自己写规范？它给你堆一份 500 行的「最佳实践」——一半是常识，一半是没跑通就写进去的命令，文件越肥，越没人当真。
+
+agentsmd 反其道而行：**每条规则一句话**、**总长硬上限 120 行**、**命令逐条核验**、**落盘前必须经你批准**。规范是宪法，不是垃圾场。
+
+## 怎么说，比较容易一次做好？
+
+**固化本次教训**（最常见）：
+
+> 把这次踩的坑固化成项目规则
+
+**瘦身一份已经很肥的规范**：
+
+> 更新项目规范：把这次的教训按合并决策表整合进去，超 120 行就先删后加
+
+**新项目初始化**：
+
+> 项目还没有 AGENTS.md，用 agentsmd 生成首版，命令都要实跑核验
+
+**顺手归档**：
+
+> 把教训写进 AGENTS.md，并把根目录散落的文档归集到 docs/
+
+## 从会话到规范，它做七件事
+
+1. **收集教训**：提取你指出的错误、实际踩的坑、重复出现（≥2 次）的偏好、验证有效的做法；一次性细节与通用常识直接排除。
+2. **蒸馏规则**：泛化 → 压成一行 → 归入最贴近的章节；三关准入，缺一丢弃。
+3. **读取现状**：已有 AGENTS.md 就逐条建立现有规则清单；没有就扫描项目生成首版并核验每条命令。
+4. **有机合并**：新规则过五道闸门后才可能写入；接近 120 行先删后加，有价值内容迁 `docs/`。
+5. **确认写入**：提交完整改动方案（新增 / 合并 / 删除 / 迁移 / 行数），你批准后才动文件。
+6. **同步记忆与进度**：agent 有记忆机制就沉淀项目记忆，有 TODO / CHANGELOG 就同步更新。
+7. **文档归集**（可选）：列出散落文档与去向方案，批准后移动并修复断链。
+
+## 最后你会得到什么？
+
+- 一份 **≤120 行**、章节贴合项目实际、无占位空条的 `AGENTS.md`
+- 迁移到 `docs/` 的参考内容，与根文件里的一行引用
+- 更新后的 agent 项目记忆与进度文件
+- 一个归档整洁、无断链的 `docs/`
+
+## 安装
+
+### Claude Code / Codex / Cursor（git clone）
+
+```bash
+git clone https://github.com/kelegele/agentsmd-skill.git ~/.claude/skills/agentsmd   # 全局
+git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd    # 仅当前项目
+```
+
+### 手动复制（任意 agent）
+
+把仓库复制到目标 agent 的技能目录，目录名须为 `agentsmd`：
+
+| Agent | 全局技能目录 |
+|---|---|
+| Claude Code | `~/.claude/skills/` |
+| Codex | `~/.codex/skills/` |
+| 跨 agent 通用 | `~/.agents/skills/` |
+| WorkBuddy | `~/.workbuddy/skills/` |
+
+### WorkBuddy URL 导入
+
+左侧栏 **技能 → 添加技能 → 通过 URL 导入**，粘贴 `https://github.com/kelegele/agentsmd-skill`，确认启用。
+
+> 注：部分 agent 需重启或新开对话才能加载新技能。
+
+## FAQ
+
+**会让 AI 堆一堆通用常识吗？**
+不会。写入前过三关准入门槛，「禁止为了看起来完整堆砌通用常识」写死在工作流里。
+
+**规范里的命令跑不通怎么办？**
+首版每条命令必须实跑确认，或与构建 / CI 配置逐一核对，跑不通、核对不上的一律不写入。
+
+**文件会不会越用越大？**
+不会。硬上限 120 行，新规则必须过合并闸门，「只增不减」被工作流直接禁止。
+
+**换个 agent 还能用吗？**
+能。AGENTS.md 遵循 [agents.md](https://agents.md/) 开源规范，Claude Code / Codex / Cursor / Gemini CLI / OpenCode / WorkBuddy 读同一份。
+
+**会不经我同意改文件吗？**
+不会。所有写入——AGENTS.md、记忆、进度文件、移动文档——先出方案、批准后才执行。
+
+## 仓库结构
 
 ```
 agentsmd/
@@ -25,70 +138,6 @@ agentsmd/
     └── AGENTS-example.md        # agents.md 官方真实成稿示例
 ```
 
-## 使用
+## 反馈
 
-在任意已安装本技能的 agent（Claude Code、Codex、Cursor、WorkBuddy 等）中说：
-
-> 用 agentsmd 把这次的教训固化进 AGENTS.md
-
-顺带整理散落文档时说：
-
-> 用 agentsmd 把这次的教训固化进 AGENTS.md，并把项目里散落的文档归集到 docs/
-
-## 安装
-
-### 方式一：npx skills 一键安装（推荐，通用）
-
-```bash
-npx skills add kelegele/agentsmd-skill
-```
-
-在交互中选择目标 agent（Claude Code / Codex / Cursor / Gemini CLI 等），可选全局或项目级安装。
-
-### 方式二：Claude Code
-
-```bash
-# 全局（所有项目可用）
-git clone https://github.com/kelegele/agentsmd-skill.git ~/.claude/skills/agentsmd
-
-# 或仅当前项目
-git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
-```
-
-### 方式三：手动复制（任意 agent）
-
-把仓库目录复制到目标 agent 的技能目录即可，技能目录名须为 `agentsmd`：
-
-| Agent | 全局技能目录 |
-|---|---|
-| Claude Code | `~/.claude/skills/` |
-| Codex | `~/.codex/skills/` |
-| 跨 agent 通用 | `~/.agents/skills/` |
-| WorkBuddy | `~/.workbuddy/skills/` |
-
-```bash
-git clone https://github.com/kelegele/agentsmd-skill.git
-cp -r agentsmd-skill ~/.agents/skills/agentsmd   # 换成目标 agent 的目录
-```
-
-### 方式四：WorkBuddy URL 导入
-
-1. 打开 WorkBuddy 左侧栏 **技能** → **添加技能**；
-2. 选择 **通过 URL 导入**，粘贴本仓库地址：`https://github.com/kelegele/agentsmd-skill`；
-3. 确认导入后，在【技能管理】中确认已启用。
-
-### 方式五：把 prompt 发给 Agent，由它代办安装
-
-不想动手，直接把下面这段话发给任意支持 skills 的 Agent（Claude Code / Codex / Cursor 等）：
-
-```text
-请帮我安装 agentsmd 技能：
-git clone https://github.com/kelegele/agentsmd-skill.git
-然后把仓库目录完整复制到我的技能目录，目录名保持 agentsmd。
-我的 agent 是 <Claude Code / Codex / Cursor / 其他>，请装到对应位置
-（Claude Code 全局为 ~/.claude/skills/agentsmd，Codex 为 ~/.codex/skills/agentsmd，
-跨 agent 通用为 ~/.agents/skills/agentsmd）。
-装完告诉我怎么触发它。
-```
-
-> 注：部分 agent 需重启或新开对话才能加载新技能。安装后在对话中说"**用 agentsmd 把这次的教训固化进 AGENTS.md**"即可触发。
+遇到问题或有想法，欢迎 [提 issue](https://github.com/kelegele/agentsmd-skill/issues)。
