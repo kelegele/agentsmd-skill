@@ -121,7 +121,6 @@ git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
 **npx skills 安装**：用 CLI 自带的更新命令
 
 ```bash
-npx skills check             # 查看哪些已装技能有新版本
 npx skills update agentsmd   # 只更新 agentsmd；不带名字则更新全部
 ```
 
