@@ -114,6 +114,29 @@ git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
 
 > 注：部分 agent 需重启或新开对话才能加载新技能。
 
+## 更新
+
+按当初的安装方式对应操作（各版本变更内容见 [CHANGELOG](CHANGELOG.md)）：
+
+**npx skills 安装**：用 CLI 自带的更新命令
+
+```bash
+npx skills check             # 查看哪些已装技能有新版本
+npx skills update agentsmd   # 只更新 agentsmd；不带名字则更新全部
+```
+
+**git clone 安装**：进入克隆目录拉取最新
+
+```bash
+git -C ~/.claude/skills/agentsmd pull   # 全局安装的路径；项目内安装换成对应目录
+```
+
+**手动复制**：重新把仓库内容覆盖复制到技能目录。
+
+**WorkBuddy URL 导入**：重新走一遍「技能 → 添加技能 → 通过 URL 导入」。
+
+> 注：更新后部分 agent 需重启或新开对话才能加载新版。
+
 ## FAQ
 
 **会让 AI 堆一堆通用常识吗？**
