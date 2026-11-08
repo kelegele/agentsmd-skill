@@ -184,6 +184,11 @@ agentsmd/
 
 > The above is the skill package itself — that's all that gets installed. The repo also contains project collaboration files (HANDOVER.md, docs/, scripts/, .zcode/, etc., Chinese docs under [docs/zh-CN/](docs/zh-CN/)); they are not part of the skill.
 
+## Related
+
+- [project-handoff-skill](https://github.com/kelegele/project-handoff-skill) — hand work across agents without re-explaining. agentsmd remembers *how* to work; project-handoff remembers *where you left off*.
+- Blog: [design philosophy](https://www.kelegele.com/blog/agents-md-lessons-without-bloat) · [two months of iteration](https://www.kelegele.com/blog/agentsmd-skill-iteration-retrospective) · [usage guide](https://www.kelegele.com/blog/agentsmd-scene-guide)
+
 ## Feedback
 
 Issues and ideas are welcome at [GitHub Issues](https://github.com/kelegele/agentsmd-skill/issues). More projects on the author's site [kelegele.com](https://kelegele.com).

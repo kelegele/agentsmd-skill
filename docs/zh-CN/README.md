@@ -184,6 +184,11 @@ agentsmd/
 
 > 以上为 skill 包本体，安装时复制的只是这些。仓库另含项目协作用文件（HANDOVER.md、docs/、scripts/、.zcode/ 等，中文版文档在 [docs/zh-CN/](.)），不属于 skill 安装内容。
 
+## 相关项目
+
+- [project-handoff-skill](https://github.com/kelegele/project-handoff-skill)——换一个 agent 接着干，不用从头再讲一遍。agentsmd 管「怎么干」，project-handoff 管「干到哪」。
+- 博客文章：[设计哲学](https://www.kelegele.com/blog/agents-md-lessons-without-bloat) · [迭代复盘](https://www.kelegele.com/blog/agentsmd-skill-iteration-retrospective) · [使用指南](https://www.kelegele.com/blog/agentsmd-scene-guide)
+
 ## 反馈
 
 遇到问题或有想法，欢迎 [提 issue](https://github.com/kelegele/agentsmd-skill/issues)。更多项目见作者站点 [kelegele.com](https://kelegele.com)。
