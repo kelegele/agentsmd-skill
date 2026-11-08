@@ -1,8 +1,11 @@
 ---
 name: agentsmd
-version: 1.5.0
+version: 1.5.1
 description: 将项目经验教训精炼固化为 AGENTS.md（或更新已有 AGENTS.md），自动适配 coding 与 work（非代码协作目录）场景，并可同步项目记忆与进度/状态记录、归集散落的产出文件（按场景归入 docs/、data/、references/）。当用户说"总结经验/教训写进 AGENTS.md"、"把这次踩的坑固化成项目规则"、"更新项目规范"、"整理项目文档与数据"、"沉淀项目协作规范"、"文档归档到 docs"等时使用。所有文件改动均须先经用户确认。产出严格遵循 agents.md 开源规范，强制精简、去重、有机合并，防止规则文件无限膨胀。
 agent_created: true
+metadata:
+  openclaw:
+    homepage: https://github.com/kelegele/agentsmd-skill
 ---
 
 # Lessons To AGENTS.md
@@ -131,3 +134,8 @@ Step 3 读取现状时先判定场景，两套场景工作流一致，仅三处�
 - `references/agents-md-spec.md` — agents.md 规范要点摘要，首次为某项目创建 AGENTS.md 前必读。
 - `assets/AGENTS-template.md` — 章节结构参考骨架，生成首版时可参考，但须按项目实际裁剪，不得保留不适用的空章节。
 - `assets/AGENTS-example.md` — agents.md 官方真实成稿示例（pnpm/Turborepo monorepo），用于把握合格成稿的颗粒度与密度。
+
+## 关于
+
+- 仓库与更新：[kelegele/agentsmd-skill](https://github.com/kelegele/agentsmd-skill)
+- 作者站点：[kelegele.com](https://kelegele.com)

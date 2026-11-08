@@ -2,13 +2,17 @@
 
 版本号：vMAJOR.MINOR.PATCH。MINOR 功能新增、PATCH 修订、MAJOR 架构级变更。
 
-## Unreleased
+## v1.5.1 - 2026-11-09
 
 ### Added
 
 - README 特性列表升格「记忆与进度同步」为卖点：借宿主 agent 自身的记忆机制沉淀项目记忆——按宿主格式、先查重、批准后写入，不另起炉灶；无记忆机制则静默跳过（表格末行与七件事⑥同步改写）
 - FAQ 新增「Hermes / OpenClaw 这类 personal agent 能用吗？」条目：纯 Markdown 无依赖不绑定 CLI，有记忆机制就按其格式沉淀记忆
 - README「仓库结构」加注：仓库另含协作用文件，不属于 skill 安装内容
+- SKILL.md 文末新增「关于」：GitHub 仓库与作者站点 [kelegele.com](https://kelegele.com) 引流位
+- frontmatter 新增 `metadata.openclaw.homepage`（ClawHub 卡片主页链接指向 GitHub 仓库）
+- README 徽章区新增 skills.sh 安装徽章；「安装」新增技能市场入口（ClawHub、LobeHub Skills Marketplace）；「反馈」补作者站点
+- 首次发布至 ClawHub 与 LobeHub Skills Marketplace（ClawHub 平台条款下按 MIT-0 分发）；skills.sh 此前已自动收录
 
 ## v1.5.0 - 2026-11-05
 

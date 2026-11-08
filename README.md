@@ -3,6 +3,7 @@
 **你踩过的坑，AI 不再踩第二遍。**
 
 [![GitHub stars](https://img.shields.io/github/stars/kelegele/agentsmd-skill?style=flat-square)](https://github.com/kelegele/agentsmd-skill/stargazers)
+[![skills.sh installs](https://skills.sh/b/kelegele/agentsmd-skill?style=flat-square)](https://www.skills.sh/kelegele/agentsmd-skill)
 ![Agent Skill](https://img.shields.io/badge/格式-Agent_Skills-blue?style=flat-square)
 ![Claude Code](https://img.shields.io/badge/支持-Claude_Code-purple?style=flat-square)
 ![Codex](https://img.shields.io/badge/支持-Codex-black?style=flat-square)
@@ -112,6 +113,14 @@ git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
 
 左侧栏 **技能 → 添加技能 → 通过 URL 导入**，粘贴 `https://github.com/kelegele/agentsmd-skill`，确认启用。
 
+### 技能市场安装
+
+```bash
+clawhub install agentsmd   # ClawHub（OpenClaw 生态：openclaw skills install agentsmd）
+```
+
+也可在 [LobeHub Skills Marketplace](https://lobehub.com/skills/agentsmd) 一键安装。
+
 > 注：部分 agent 需重启或新开对话才能加载新技能。
 
 ## 更新
@@ -175,4 +184,4 @@ agentsmd/
 
 ## 反馈
 
-遇到问题或有想法，欢迎 [提 issue](https://github.com/kelegele/agentsmd-skill/issues)。
+遇到问题或有想法，欢迎 [提 issue](https://github.com/kelegele/agentsmd-skill/issues)。更多项目见作者站点 [kelegele.com](https://kelegele.com)。
