@@ -1,0 +1,4 @@
+.v2c/
+.video_agent/
+out/
+docs/execution/agent-runs/**/*.lock
