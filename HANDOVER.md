@@ -22,7 +22,8 @@
   - skills.sh 已收录（此前自动上榜）：https://www.skills.sh/kelegele/agentsmd-skill
   - ClawHub 已公开 agentsmd@1.5.1：https://clawhub.ai/kelegele/agentsmd（MIT-0，同步出现在 Hermes 市场 clawhub/ 来源）
   - Hermes 官方 Hub PR 待审核：NousResearch/hermes-agent#151512（optional-skills/software-development/agentsmd，英文版，已 align 上游 v1.5.2）
-  - v1.5.2 已发版（英文默认 + 双语 description；release v1.5.2；ClawHub v1.5.2 过审后自动切 latest；LobeHub 待网页创建后推 1.5.2）
+  - v1.5.2 已发版（英文默认 + 双语 description；release v1.5.2；ClawHub v1.5.2 过审后自动切 latest）
+  - LobeHub 已上架：https://lobehub.com/skills/kelegele-agentsmd-skill （v1.5.2，标识锚定 GitHub 仓库）
 
 ## 未完成事项与下一步
 
@@ -30,7 +31,7 @@
 - Codex / QwenWork 钩子配置未安装（本会话仅确认使用 ZCode），需要时按模板补
 - 自动记录需新会话真实验证：本会话（2026-11-09 启动检查已完成，历史 2 条）结束时检查 `docs/execution/agent-runs/` 是否新增记录
 - 文章发布后：在本文件登记发布日期与标题终选
-- LobeHub 市场发布待用户网页操作：新技能创建仅网页端（lobehub.com/publish，网页登录后操作）；发布包在 /tmp/agentsmd-publish/agentsmd（v1.5.2 英文版），`lhm` 已登录且 GitHub 已连接，完成后回填技能页链接
+- LobeHub ✅ 已完成（2026-11-09）：市场自动抓取入库后 `lhm skill claim kelegele-agentsmd-skill` 认领 + CLI 推 v1.5.2；卡片 https://lobehub.com/skills/kelegele-agentsmd-skill 。README 安装链接已改为该 URL（随下次发版进包）。无「新建技能」网页入口，/publish 不存在
 - ClawHub v1.5.2 提交后偶发需人工复核：过审后卡片 latest 应显示 1.5.2（双语 description），未切换则查 /dashboard 扫描状态
 - Hermes PR #151512 有结果后：登记 merge 或被拒原因；被拒则评估改投（如社区推广渠道）
 - 后续版本发布时：ClawHub（clawhub skill publish）、LobeHub（lhm skill publish，创建后可用）、skills.sh（随 GitHub 自动）三处随 CHANGELOG 同步升级

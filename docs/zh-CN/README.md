@@ -121,7 +121,7 @@ git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd
 clawhub install agentsmd   # ClawHub（OpenClaw 生态：openclaw skills install agentsmd）
 ```
 
-也可在 [LobeHub Skills Marketplace](https://lobehub.com/skills/agentsmd) 一键安装。
+也可在 [LobeHub Skills Marketplace](https://lobehub.com/skills/kelegele-agentsmd-skill) 一键安装。
 
 > 注：部分 agent 需重启或新开对话才能加载新技能。
 

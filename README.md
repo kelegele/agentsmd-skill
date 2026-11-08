@@ -121,7 +121,7 @@ Sidebar **Skills → Add Skill → Import via URL**, paste `https://github.com/k
 clawhub install agentsmd   # ClawHub (OpenClaw ecosystem: openclaw skills install agentsmd)
 ```
 
-Also available on the [LobeHub Skills Marketplace](https://lobehub.com/skills/agentsmd).
+Also available on the [LobeHub Skills Marketplace](https://lobehub.com/skills/kelegele-agentsmd-skill).
 
 > Note: some agents need a restart or a new conversation to load new skills.
 

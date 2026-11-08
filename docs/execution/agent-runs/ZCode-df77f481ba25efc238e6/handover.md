@@ -28,4 +28,4 @@
 - 发版：v1.5.2（commit 18a59d9，release https://github.com/kelegele/agentsmd-skill/releases/tag/v1.5.2）
 - ClawHub：v1.5.2 已提交（过审后 latest 由 1.5.1 自动切换；卡片 https://clawhub.ai/kelegele/skills/agentsmd ）
 - Hermes PR：分支已 align v1.5.2，并留评论说明同源（comment 6727742638）
-- LobeHub：仍待用户网页端 /publish 创建（用 v1.5.2 包 /tmp/agentsmd-publish/agentsmd）。2026-11-09 用户反馈 /publish 打不开：已核实本机直连 200、页面为登录门（未登录 302 → /signin），判断为浏览器代理出口问题或未登录；已给出「登录后再访问 / 调代理」路径与零操作备选（等市场自动抓取 GitHub 入库后 claim + publish）。CLI 侧已确认无创建端点（skill publish 仅限已持有技能，claim 仅限已入库技能）
+- LobeHub：✅ 已解决（2026-11-09）。真实发布模型 = 平台自动抓取 GitHub/skills.sh 入库 → 作者 `lhm skill claim <identifier>` 认领 → `lhm skill publish` 推版本；**没有「新建技能」网页入口**（/publish 登录后 404，此前判断有误已修正）。agentsmd 已被抓取入库，identifier `kelegele-agentsmd-skill`，已 claim + publish v1.5.2，卡片 https://lobehub.com/skills/kelegele-agentsmd-skill （README/zh-CN README 安装链接已同步修正为该 URL，待下次发版随包更新）
