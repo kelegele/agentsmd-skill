@@ -20,3 +20,12 @@
   - ClawHub 卡片 0 installs 属新发正常态
 - 下一步：用户完成 LobeHub /publish 后在本文件与 HANDOVER.md 回填技能页链接；PR 有结果（merge/拒）后登记；后续发版时三 Hub 随 CHANGELOG 同步升级
 - 授权范围：按最新用户明确指令（四项动作 + 接受 MIT-0 + 引流要求），不因钩子扩大授权
+
+## 追加：v1.5.2 全量英文化（同日第二轮，用户批准）
+
+- 用户决定：skill 包与 README 英文默认，中文收 `docs/zh-CN/`；description 双语（英文主句 + 中文触发短语，触发判据兼容中文）；随即发版重推
+- 改动：SKILL.md 正文/`references/`/`assets/`/README 全量 EN（正文与 Hermes PR #151512 同源）；`docs/zh-CN/{SKILL,README}.md` 中文副本（互链，不随包发布）；AGENTS.md 语言规范固化（原「文档用简体中文」措辞同步修正）；CHANGELOG v1.5.2
+- 发版：v1.5.2（commit 18a59d9，release https://github.com/kelegele/agentsmd-skill/releases/tag/v1.5.2）
+- ClawHub：v1.5.2 已提交（过审后 latest 由 1.5.1 自动切换；卡片 https://clawhub.ai/kelegele/skills/agentsmd ）
+- Hermes PR：分支已 align v1.5.2，并留评论说明同源（comment 6727742638）
+- LobeHub：仍待用户网页端 /publish 创建（用 v1.5.2 包 /tmp/agentsmd-publish/agentsmd）
