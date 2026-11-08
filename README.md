@@ -41,7 +41,7 @@ npx skills add kelegele/agentsmd-skill
 | 只属于某个子目录的教训 | 下沉为该子目录的局部 AGENTS.md，根文件只留全局适用内容 |
 | 纯文档 / 数据的 work 目录（报告库、协作目录） | 自动切换适配：扫文档结构与命名惯例替代构建配置，规则偏向口径、归档与交付规范，归集多出 `references/`（参考资料）去向 |
 | 散落在根目录的文档与数据文件 | 先查代码引用再出方案：文档归 `docs/<主题>/`、数据归 `data/<主题>/`，批准后移动并修复所有引用断链 |
-| agent 项目记忆、TODO / CHANGELOG | 同步沉淀为项目记忆、更新进度文件（先查重，同样先批准） |
+| Hermes / OpenClaw 等 personal agent 的记忆、TODO / CHANGELOG | 借宿主自己的记忆机制沉淀项目记忆——按宿主格式、先查重、批准后写入，不另起炉灶；无记忆机制则静默跳过 |
 
 ## 为什么不是「让 AI 自己写一份」？
 
@@ -78,7 +78,7 @@ agentsmd 反其道而行：**每条规则一句话**、**总长硬上限 120 行
 3. **读取现状**：已有 AGENTS.md 就逐条建立现有规则清单；没有就先判定 coding / work 场景再生成首版——coding 逐条核验命令，work 核对文中引用路径。
 4. **有机合并**：新规则过五道闸门后才可能写入；接近 120 行先删后加，有价值内容迁 `docs/`。
 5. **确认写入**：提交完整改动方案（新增 / 合并 / 删除 / 迁移 / 行数），你批准后才动文件。
-6. **同步记忆与进度**：agent 有记忆机制就沉淀项目记忆，有 TODO / CHANGELOG 就同步更新。
+6. **同步记忆与进度**：借宿主的壳，不另起炉灶——agent 有记忆机制就按其格式沉淀项目记忆，有 TODO / CHANGELOG 就同步更新；不造私有记忆格式，装到哪个 agent 都融入其生态。
 7. **文档与数据归集**（可选）：先查引用再出方案——文档归 `docs/`、数据归 `data/`，work 场景另加参考资料归 `references/`；批准后移动并修复断链。
 
 ## 最后你会得到什么？
@@ -150,6 +150,9 @@ git -C ~/.claude/skills/agentsmd pull   # 全局安装的路径；项目内安�
 **换个 agent 还能用吗？**
 能。AGENTS.md 遵循 [agents.md](https://agents.md/) 开源规范，Claude Code / Codex / Cursor / Gemini CLI / OpenCode / WorkBuddy 读同一份。
 
+**Hermes / OpenClaw 这类 personal agent 能用吗？**
+能。skill 是纯 Markdown，无构建无依赖、不绑定 CLI；agent 有记忆机制就按其格式沉淀记忆（先查重、批准后写入），没有就静默跳过。
+
 **非代码目录能用吗？**
 能。判定为 work 场景后自动切换适配：扫描对象换成文档结构与命名惯例，规则章节偏向口径、归档与交付，归集多出 `references/` 去向，AGENTS.md 格式不变。
 
@@ -167,6 +170,8 @@ agentsmd/
     ├── AGENTS-template.md       # 章节参考骨架（标准 + 可选章节）
     └── AGENTS-example.md        # agents.md 官方真实成稿示例
 ```
+
+> 以上为 skill 包本体，安装时复制的只是这些。仓库另含项目协作用文件（HANDOVER.md、docs/、scripts/、.zcode/ 等），不属于 skill 安装内容。
 
 ## 反馈
 

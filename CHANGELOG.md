@@ -2,6 +2,14 @@
 
 版本号：vMAJOR.MINOR.PATCH。MINOR 功能新增、PATCH 修订、MAJOR 架构级变更。
 
+## Unreleased
+
+### Added
+
+- README 特性列表升格「记忆与进度同步」为卖点：借宿主 agent 自身的记忆机制沉淀项目记忆——按宿主格式、先查重、批准后写入，不另起炉灶；无记忆机制则静默跳过（表格末行与七件事⑥同步改写）
+- FAQ 新增「Hermes / OpenClaw 这类 personal agent 能用吗？」条目：纯 Markdown 无依赖不绑定 CLI，有记忆机制就按其格式沉淀记忆
+- README「仓库结构」加注：仓库另含协作用文件，不属于 skill 安装内容
+
 ## v1.5.0 - 2026-11-05
 
 ### Added
