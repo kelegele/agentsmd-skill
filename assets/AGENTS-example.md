@@ -1,6 +1,6 @@
-# AGENTS.md 成稿示例
+# Sample AGENTS.md
 
-来源：[agents.md](https://agents.md/) 官方样例（pnpm + Turborepo monorepo）。读它只为把握一件事：合格的 AGENTS.md 长什么样——每条都是一行可执行指令，命令给完整可执行形式（含包管理器前缀）；无叙述、无占位符、无愿景；monorepo 根文件靠"按包过滤"的命令覆盖全局，包级细节下沉到各子包的局部 AGENTS.md。生成首版时以此为颗粒度基准。
+Source: the official [agents.md](https://agents.md/) sample (pnpm + Turborepo monorepo). Read it for one thing only: what a good finished AGENTS.md looks like — every line is a single executable instruction, commands given in full executable form (including the package-manager prefix); no narrative, no placeholders, no vision statements; in a monorepo the root file overrides globally with "per-package filtered" commands while package-level detail sinks into each sub-package's local AGENTS.md. Use it as the granularity benchmark when generating a first version.
 
 ---
 

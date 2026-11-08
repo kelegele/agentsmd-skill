@@ -1,10 +1,11 @@
 # agentsmd-skill
 
-agentsmd Agent Skill 的源仓库：纯 Markdown 技能包（SKILL.md + references/ + assets/），无构建、无测试；文档与 Release Notes 用简体中文，提交主题用英文 conventional commits，产出遵循 agents.md 开源规范。
+agentsmd Agent Skill 的源仓库：纯 Markdown 技能包（SKILL.md + references/ + assets/），无构建、无测试；技能包与 README 英文默认（中文参考译文收 docs/zh-CN/），协作文档（CHANGELOG/HANDOVER/运行记录）与 Release Notes 用简体中文，提交主题用英文 conventional commits，产出遵循 agents.md 开源规范。
 
 ## PR / Workflow Instructions
 
 - 发版：SKILL.md frontmatter `version` 与 CHANGELOG 同步升版 → commit → push → `gh release create vX.Y.Z` 远程自动建 tag，勿 git tag + git push tag；Release Notes 取自 CHANGELOG 对应条目
+- 文档语言：skill 包与 README 英文默认，中文版收 `docs/zh-CN/`（仅作参考译文，不随技能包发布）；SKILL.md frontmatter `description` 用双语（英文主句 + 中文触发短语），触发判据兼容中文
 - git push 偶发 `Connection was reset` 属瞬时故障，直接重试即可，勿判为网络不通
 
 ## Project-Specific Gotchas

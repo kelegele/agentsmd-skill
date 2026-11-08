@@ -1,187 +1,189 @@
+English | [简体中文](docs/zh-CN/README.md)
+
 # agentsmd
 
-**你踩过的坑，AI 不再踩第二遍。**
+**The pitfalls you hit — your AI never hits them twice.**
 
 [![GitHub stars](https://img.shields.io/github/stars/kelegele/agentsmd-skill?style=flat-square)](https://github.com/kelegele/agentsmd-skill/stargazers)
 [![skills.sh installs](https://skills.sh/b/kelegele/agentsmd-skill?style=flat-square)](https://www.skills.sh/kelegele/agentsmd-skill)
-![Agent Skill](https://img.shields.io/badge/格式-Agent_Skills-blue?style=flat-square)
-![Claude Code](https://img.shields.io/badge/支持-Claude_Code-purple?style=flat-square)
-![Codex](https://img.shields.io/badge/支持-Codex-black?style=flat-square)
-![Cursor](https://img.shields.io/badge/支持-Cursor-gray?style=flat-square)
+![Agent Skill](https://img.shields.io/badge/format-Agent_Skills-blue?style=flat-square)
+![Claude Code](https://img.shields.io/badge/supports-Claude_Code-purple?style=flat-square)
+![Codex](https://img.shields.io/badge/supports-Codex-black?style=flat-square)
+![Cursor](https://img.shields.io/badge/supports-Cursor-gray?style=flat-square)
 
-把这次会话里踩的坑、纠正过的错交给 AI，说一句「把教训固化进 AGENTS.md」，它会把它们蒸馏成一行行可执行的规矩，写进项目根目录的 AGENTS.md。此后每个新会话——无论 Claude Code、Codex 还是 Cursor——开工前自动读取，照办。
+Hand this session's pitfalls and corrections to your AI, say "write the lessons into AGENTS.md", and it distills them into one-line executable rules in the project root's AGENTS.md. From then on, every new session — Claude Code, Codex, or Cursor alike — reads it before starting work and follows it.
 
-> 这个 skill 来自我自己一次次重复的「调教」。每次开发，总有一些东西想固化下来：这个项目怎么构建、哪些边界不能碰、代码要守什么规范。它们不写进 AGENTS.md，就得每次开新会话重新教一遍 agent——同样的错它犯三遍，我纠正三遍，时间全耗在这上面。
+> This skill came from my own endless "re-training" sessions. In every project there are things you want to cement: how this project builds, which boundaries must not be crossed, what coding conventions apply. If they don't live in AGENTS.md, you re-teach them to the agent in every new session — the same mistake three times, three corrections, all day gone.
 >
-> 后来成了习惯：每当有通用的规范或规则要存，我就让 agent 写进 AGENTS.md。日子久了又冒出新麻烦——文件一攒就攒成常识大全，越写越肥，肥到最后连真正的规矩都被淹没在里面。
+> It became a habit: whenever there was a general rule to keep, I had the agent write it into AGENTS.md. Then a new problem crept in — the file grew into a pile of common sense, so bloated that the real rules drowned in it.
 >
-> 于是我想到：固化这件事本身，为什么不交给 skill？从此我只要说一句「把这次的教训固化进 AGENTS.md」，收集、蒸馏、合并、核验它全包，我只负责批准。然后，就有了这个 skill。
+> So I thought: why not hand the cementing itself to a skill? Now I just say "solidify this session's lessons into AGENTS.md" and it handles collecting, distilling, merging, and verifying — I only approve. That's this skill.
 
-## 30 秒开始
+## Start in 30 seconds
 
 ```bash
 npx skills add kelegele/agentsmd-skill
 ```
 
-装好后，对 AI 说：
+Then tell your agent:
 
-> 用 agentsmd 把这次的教训固化进 AGENTS.md
+> Use agentsmd to solidify this session's lessons into AGENTS.md
 
-不想动手装？直接把仓库地址发给你的 agent：
+Rather not install anything? Just paste the repo URL to your agent:
 
-> 帮我安装这个 skill：https://github.com/kelegele/agentsmd-skill ，装好后告诉我怎么用。
+> Install this skill for me: https://github.com/kelegele/agentsmd-skill , then show me how to use it.
 
-## 它能帮你做什么？
+## What does it do for you?
 
-| 你手里的东西 | 它会怎么处理 |
+| What you have | What it does with it |
 |---|---|
-| 这次会话踩的坑、纠正过的错、重复过的偏好 | 过三关准入（会再遇到 + 违反有实际损失 + 一行说得清），泛化成通用规则、压成一行祈使句写入 AGENTS.md |
-| 一份越写越肥的 AGENTS.md | 五道合并闸门：等价丢弃 / 重叠合并 / 特例泛化 / 矛盾取新 / 过时删除，禁止无条件追加 |
-| 接近 120 行上限 | 仍有价值的内容迁 `docs/<主题>.md`，原位留一行引用——删的是冗余，不是记忆 |
-| 一个还没有 AGENTS.md 的新项目 | 扫描目录结构、README 与构建/CI 配置按实际生成；每条命令实跑或逐一核对，跑不通的不写入 |
-| 只属于某个子目录的教训 | 下沉为该子目录的局部 AGENTS.md，根文件只留全局适用内容 |
-| 纯文档 / 数据的 work 目录（报告库、协作目录） | 自动切换适配：扫文档结构与命名惯例替代构建配置，规则偏向口径、归档与交付规范，归集多出 `references/`（参考资料）去向 |
-| 散落在根目录的文档与数据文件 | 先查代码引用再出方案：文档归 `docs/<主题>/`、数据归 `data/<主题>/`，批准后移动并修复所有引用断链 |
-| Hermes / OpenClaw 等 personal agent 的记忆、TODO / CHANGELOG | 借宿主自己的记忆机制沉淀项目记忆——按宿主格式、先查重、批准后写入，不另起炉灶；无记忆机制则静默跳过 |
+| Pitfalls, corrections, repeated preferences from this session | Three-pass admission bar (will recur + real loss if violated + fits in one line), generalized into rules, compressed to one-line imperatives, written into AGENTS.md |
+| An ever-fatter AGENTS.md | Five merge gates: discard equivalents / merge overlaps / generalize special cases / prefer the newer on conflict / delete outdated — unconditional appending is forbidden |
+| Approaching the 120-line cap | Content still worth keeping moves to `docs/<topic>.md` with a one-line reference — pruning removes redundancy, not memory |
+| A new project without AGENTS.md | Scans directory structure, README, and build/CI configs to generate one that fits; every command is run or cross-checked — nothing unverified gets written |
+| A lesson that only applies to one subdirectory | Sinks into a local AGENTS.md for that subdirectory; the root file keeps globally applicable content only |
+| A docs-only / data-only work directory (report library, collaboration space) | Auto-adapts: scans doc structure and naming conventions instead of build configs; rules lean toward data definitions, archiving, and delivery; collection adds `references/` as a destination |
+| Documents and data files scattered at the root | Checks code references before proposing: docs go to `docs/<topic>/`, data to `data/<topic>/`; files move only after approval, and every broken link gets fixed |
+| Memory, TODO / CHANGELOG of personal agents like Hermes / OpenClaw | Sediments project memory through the host's own mechanism — host format, dedupe first, approval before write; silently skips if there is none |
 
-## 为什么不是「让 AI 自己写一份」？
+## Why not just "let the AI write one"?
 
-每个新会话 AI 都从零开始：你纠正过的错它今天照犯，教训散落在几十个会话记录里，换会话、换工具全部蒸发。让它自己写规范？它给你堆一份 500 行的「最佳实践」——一半是常识，一半是没跑通就写进去的命令，文件越肥，越没人当真。
+Every new session starts from zero: the mistakes you corrected today repeat tomorrow, lessons scatter across dozens of session logs, and switching sessions or tools evaporates all of it. Let the AI write your guidelines and you'll get a 500-line "best practices" pile — half common sense, half commands that were never run. The fatter the file, the less anyone follows it.
 
-agentsmd 反其道而行：**每条规则一句话**、**总长硬上限 120 行**、**命令逐条核验**、**落盘前必须经你批准**。规范是宪法，不是垃圾场。
+agentsmd goes the other way: **one sentence per rule**, **a hard 120-line cap**, **every command verified**, **nothing written without your approval**. Guidelines are a constitution, not a landfill.
 
-## 怎么说，比较容易一次做好？
+## How to ask for it, so it lands right the first time
 
-**固化本次教训**（最常见）：
+**Solidify this session's lessons** (most common):
 
-> 把这次踩的坑固化成项目规则
+> Turn the pitfalls from this session into project rules
 
-**瘦身一份已经很肥的规范**：
+**Slim down an already-bloated guidelines file**:
 
-> 更新项目规范：把这次的教训按合并决策表整合进去，超 120 行就先删后加
+> Update project guidelines: merge this session's lessons using the merge decision table; over 120 lines, delete before adding
 
-**新项目初始化**：
+**New project init**:
 
-> 项目还没有 AGENTS.md，用 agentsmd 生成首版，命令都要实跑核验
+> No AGENTS.md yet — generate the first version with agentsmd; verify every command by actually running it
 
-**work 目录（纯文档 / 数据协作目录）**：
+**Work directory (docs / data only)**:
 
-> 沉淀这个协作目录的工作规范，顺手把散落的报告、数据、参考资料归整一下
+> Sediment working rules for this collaboration directory, and collect the scattered reports, data, and reference material
 
-**顺手归档**：
+**Archive while you're at it**:
 
-> 把教训写进 AGENTS.md，顺便把根目录散落的文档和数据归整一下
+> Write the lessons into AGENTS.md, and collect the docs and data scattered at the root
 
-## 从会话到规范，它做七件事
+## From session to guidelines, it does seven things
 
-1. **收集教训**：提取你指出的错误、实际踩的坑、重复出现（≥2 次）的偏好、验证有效的做法；一次性细节与通用常识直接排除。
-2. **蒸馏规则**：泛化 → 压成一行 → 归入最贴近的章节；三关准入，缺一丢弃。
-3. **读取现状**：已有 AGENTS.md 就逐条建立现有规则清单；没有就先判定 coding / work 场景再生成首版——coding 逐条核验命令，work 核对文中引用路径。
-4. **有机合并**：新规则过五道闸门后才可能写入；接近 120 行先删后加，有价值内容迁 `docs/`。
-5. **确认写入**：提交完整改动方案（新增 / 合并 / 删除 / 迁移 / 行数），你批准后才动文件。
-6. **同步记忆与进度**：借宿主的壳，不另起炉灶——agent 有记忆机制就按其格式沉淀项目记忆，有 TODO / CHANGELOG 就同步更新；不造私有记忆格式，装到哪个 agent 都融入其生态。
-7. **文档与数据归集**（可选）：先查引用再出方案——文档归 `docs/`、数据归 `data/`，work 场景另加参考资料归 `references/`；批准后移动并修复断链。
+1. **Collect lessons**: extracts errors you pointed out, pitfalls actually hit, preferences repeated (≥2 times), validated approaches; one-off details and common sense are excluded outright.
+2. **Distill rules**: generalize → compress to one line → file into the closest section; three-pass admission, miss one and it's dropped.
+3. **Read current state**: existing AGENTS.md gets a full rule inventory; none? Detect coding / work scenario first, then generate — coding verifies commands one by one, work verifies referenced paths.
+4. **Organic merge**: a rule gets in only through the five gates; near 120 lines, delete before adding; valuable content migrates to `docs/`.
+5. **Confirm and write**: presents the complete change plan (adds / merges / deletes / migrations / line count); files are touched only after your approval.
+6. **Sync memory and progress**: rides the host, builds nothing new — if the agent has a memory mechanism, project memory settles in its format; TODO / CHANGELOG get updated too; no private memory formats, so it fits whichever agent it's installed in.
+7. **Collect docs and data** (optional): checks references before proposing — docs to `docs/`, data to `data/`, plus `references/` in work scenarios; files move and links get fixed only after approval.
 
-## 最后你会得到什么？
+## What you end up with
 
-- 一份 **≤120 行**、章节贴合项目实际、无占位空条的 `AGENTS.md`
-- 迁移到 `docs/` 的参考内容，与根文件里的一行引用
-- 更新后的 agent 项目记忆与进度文件
-- 归档整洁、无断链的 `docs/`（按场景另有 `data/`、`references/`）
+- An `AGENTS.md` **≤120 lines**, sections fitted to the project, no placeholder fluff
+- Migrated reference content in `docs/`, with one-line references in the root file
+- Updated agent project memory and progress files
+- A tidy, link-clean `docs/` (plus `data/`, `references/` per scenario)
 
-## 安装
+## Install
 
-### Claude Code / Codex / Cursor（git clone）
+### Claude Code / Codex / Cursor (git clone)
 
 ```bash
-git clone https://github.com/kelegele/agentsmd-skill.git ~/.claude/skills/agentsmd   # 全局
-git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd    # 仅当前项目
+git clone https://github.com/kelegele/agentsmd-skill.git ~/.claude/skills/agentsmd   # global
+git clone https://github.com/kelegele/agentsmd-skill.git .claude/skills/agentsmd    # this project only
 ```
 
-### 手动复制（任意 agent）
+### Manual copy (any agent)
 
-把仓库复制到目标 agent 的技能目录，目录名须为 `agentsmd`：
+Copy the repo into the agent's skill directory, folder named `agentsmd`:
 
-| Agent | 全局技能目录 |
+| Agent | Global skill directory |
 |---|---|
 | Claude Code | `~/.claude/skills/` |
 | Codex | `~/.codex/skills/` |
-| 跨 agent 通用 | `~/.agents/skills/` |
+| Cross-agent | `~/.agents/skills/` |
 | WorkBuddy | `~/.workbuddy/skills/` |
 
-### WorkBuddy URL 导入
+### WorkBuddy URL import
 
-左侧栏 **技能 → 添加技能 → 通过 URL 导入**，粘贴 `https://github.com/kelegele/agentsmd-skill`，确认启用。
+Sidebar **Skills → Add Skill → Import via URL**, paste `https://github.com/kelegele/agentsmd-skill`, confirm to enable.
 
-### 技能市场安装
-
-```bash
-clawhub install agentsmd   # ClawHub（OpenClaw 生态：openclaw skills install agentsmd）
-```
-
-也可在 [LobeHub Skills Marketplace](https://lobehub.com/skills/agentsmd) 一键安装。
-
-> 注：部分 agent 需重启或新开对话才能加载新技能。
-
-## 更新
-
-按当初的安装方式对应操作（各版本变更内容见 [CHANGELOG](CHANGELOG.md)）：
-
-**npx skills 安装**：用 CLI 自带的更新命令
+### Install from skill marketplaces
 
 ```bash
-npx skills update agentsmd   # 只更新 agentsmd；不带名字则更新全部
+clawhub install agentsmd   # ClawHub (OpenClaw ecosystem: openclaw skills install agentsmd)
 ```
 
-**git clone 安装**：进入克隆目录拉取最新
+Also available on the [LobeHub Skills Marketplace](https://lobehub.com/skills/agentsmd).
+
+> Note: some agents need a restart or a new conversation to load new skills.
+
+## Update
+
+Follow the way you installed it (per-version changes in the [CHANGELOG](CHANGELOG.md)):
+
+**npx skills install**: use the CLI's own update command
 
 ```bash
-git -C ~/.claude/skills/agentsmd pull   # 全局安装的路径；项目内安装换成对应目录
+npx skills update agentsmd   # updates agentsmd only; without a name, updates all
 ```
 
-**手动复制**：重新把仓库内容覆盖复制到技能目录。
+**git clone install**: pull in the cloned directory
 
-**WorkBuddy URL 导入**：重新走一遍「技能 → 添加技能 → 通过 URL 导入」。
+```bash
+git -C ~/.claude/skills/agentsmd pull   # global install path; adjust for project-local installs
+```
 
-> 注：更新后部分 agent 需重启或新开对话才能加载新版。
+**Manual copy**: overwrite the skill directory with the repo contents.
+
+**WorkBuddy URL import**: redo "Skills → Add Skill → Import via URL".
+
+> Note: after updating, some agents need a restart or a new conversation to load the new version.
 
 ## FAQ
 
-**会让 AI 堆一堆通用常识吗？**
-不会。写入前过三关准入门槛，「禁止为了看起来完整堆砌通用常识」写死在工作流里。
+**Will it make the AI pile up generic common sense?**
+No. Every write passes the three-pass admission bar, and "no piling up generic common sense to look complete" is hard-wired into the workflow.
 
-**规范里的命令跑不通怎么办？**
-首版每条命令必须实跑确认，或与构建 / CI 配置逐一核对，跑不通、核对不上的一律不写入。
+**What if a command in the guidelines doesn't run?**
+Every first-version command must be actually run, or cross-checked against build / CI configs; anything that fails or can't be verified is never written.
 
-**文件会不会越用越大？**
-不会。硬上限 120 行，新规则必须过合并闸门，「只增不减」被工作流直接禁止。
+**Will the file grow forever?**
+No. Hard cap 120 lines, new rules must pass the merge gates, "append-only" is explicitly forbidden by the workflow.
 
-**换个 agent 还能用吗？**
-能。AGENTS.md 遵循 [agents.md](https://agents.md/) 开源规范，Claude Code / Codex / Cursor / Gemini CLI / OpenCode / WorkBuddy 读同一份。
+**Does it work with other agents?**
+Yes. AGENTS.md follows the open [agents.md](https://agents.md/) spec — Claude Code / Codex / Cursor / Gemini CLI / OpenCode / WorkBuddy all read the same file.
 
-**Hermes / OpenClaw 这类 personal agent 能用吗？**
-能。skill 是纯 Markdown，无构建无依赖、不绑定 CLI；agent 有记忆机制就按其格式沉淀记忆（先查重、批准后写入），没有就静默跳过。
+**Personal agents like Hermes / OpenClaw?**
+Yes. The skill is pure Markdown — no build, no dependencies, not tied to any CLI; if the agent has a memory mechanism, memories settle in its own format (dedupe first, approval before write); if not, it skips silently.
 
-**非代码目录能用吗？**
-能。判定为 work 场景后自动切换适配：扫描对象换成文档结构与命名惯例，规则章节偏向口径、归档与交付，归集多出 `references/` 去向，AGENTS.md 格式不变。
+**Non-code directories?**
+Yes. Once detected as a work scenario it adapts automatically: scanning shifts to doc structure and naming conventions, rules lean toward data definitions, archiving, and delivery, collection adds `references/` — the AGENTS.md format stays the same.
 
-**会不经我同意改文件吗？**
-不会。所有写入——AGENTS.md、记忆、进度文件、移动文档——先出方案、批准后才执行。
+**Will it touch files without my consent?**
+Never. Every write — AGENTS.md, memory, progress files, moving documents — is proposed first and executed only after approval.
 
-## 仓库结构
+## Repository structure
 
 ```
 agentsmd/
-├── SKILL.md                     # 核心工作流（7 步）
+├── SKILL.md                     # core workflow (7 steps)
 ├── references/
-│   └── agents-md-spec.md        # agents.md 规范要点摘要
+│   └── agents-md-spec.md        # agents.md spec summary
 └── assets/
-    ├── AGENTS-template.md       # 章节参考骨架（标准 + 可选章节）
-    └── AGENTS-example.md        # agents.md 官方真实成稿示例
+    ├── AGENTS-template.md       # section skeleton (standard + optional sections)
+    └── AGENTS-example.md        # official agents.md sample as a finished-file benchmark
 ```
 
-> 以上为 skill 包本体，安装时复制的只是这些。仓库另含项目协作用文件（HANDOVER.md、docs/、scripts/、.zcode/ 等），不属于 skill 安装内容。
+> The above is the skill package itself — that's all that gets installed. The repo also contains project collaboration files (HANDOVER.md, docs/, scripts/, .zcode/, etc., Chinese docs under [docs/zh-CN/](docs/zh-CN/)); they are not part of the skill.
 
-## 反馈
+## Feedback
 
-遇到问题或有想法，欢迎 [提 issue](https://github.com/kelegele/agentsmd-skill/issues)。更多项目见作者站点 [kelegele.com](https://kelegele.com)。
+Issues and ideas are welcome at [GitHub Issues](https://github.com/kelegele/agentsmd-skill/issues). More projects on the author's site [kelegele.com](https://kelegele.com).

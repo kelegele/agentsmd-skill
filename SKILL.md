@@ -1,7 +1,16 @@
 ---
 name: agentsmd
-version: 1.5.1
-description: 将项目经验教训精炼固化为 AGENTS.md（或更新已有 AGENTS.md），自动适配 coding 与 work（非代码协作目录）场景，并可同步项目记忆与进度/状态记录、归集散落的产出文件（按场景归入 docs/、data/、references/）。当用户说"总结经验/教训写进 AGENTS.md"、"把这次踩的坑固化成项目规则"、"更新项目规范"、"整理项目文档与数据"、"沉淀项目协作规范"、"文档归档到 docs"等时使用。所有文件改动均须先经用户确认。产出严格遵循 agents.md 开源规范，强制精简、去重、有机合并，防止规则文件无限膨胀。
+version: 1.5.2
+description: >-
+  Distill session lessons into a lean AGENTS.md (create or update), following the open agents.md
+  spec: collect lessons, distill them into one-line rules, organically merge, verify every
+  command, and write only after user approval. Adapts to coding and work (non-code
+  collaboration directory) scenarios; syncs project memory and progress/status records;
+  collects scattered docs and data into docs/, data/, references/. Trigger on requests like
+  "write the lessons into AGENTS.md", "solidify this session's pitfalls into project rules",
+  "update project guidelines", "organize project docs and data" — 中文触发词：「总结经验/教训写进
+  AGENTS.md」「把这次踩的坑固化成项目规则」「更新项目规范」「整理项目文档与数据」「沉淀项目协作规范」「文档归档到
+  docs」。All file changes require user confirmation first.
 agent_created: true
 metadata:
   openclaw:
@@ -10,132 +19,133 @@ metadata:
 
 # Lessons To AGENTS.md
 
-## 目标
+## Goal
 
-把一次性的经验教训蒸馏为少量、可长期复用、可执行的规则，写入项目根目录的 AGENTS.md。四大铁律：
+Turn one-off lessons into a small set of durable, reusable, executable rules in the project root's `AGENTS.md`. Four iron rules:
 
-1. **精简**：每条规则一句话、祈使句、可直接执行。拒绝叙事、拒绝解释性长段。
-2. **合规**：结构遵循 agents.md 开源规范（见 `references/agents-md-spec.md`），纯 Markdown、标准章节、面向 AI coding agent。
-3. **不膨胀**：AGENTS.md 是"有机整合"不是"追加日志"。总长度硬上限 **120 行**（不含空行）；接近上限时必须先删后加，仍有长期参考价值的内容可迁往 `docs/` 按需引用（见 Step 4）。单条规则失去通用性、被新规则取代、或与其他条目重复时，直接删除或合并。
-4. **先确认后落盘**：任何写文件的操作——更新 AGENTS.md、写入 agent 记忆、更新进度/状态文件、移动归集文件——必须先向用户展示拟改动内容并获批准；未经批准只出方案，不动文件。
+1. **Concise**: every rule is one line, imperative, directly executable. No narrative, no explanatory paragraphs.
+2. **Compliant**: structure follows the open [agents.md](https://agents.md/) spec (see `references/agents-md-spec.md`) — pure Markdown, standard sections, written for AI coding agents.
+3. **No bloat**: `AGENTS.md` is organic consolidation, not an append-only log. Hard cap **120 lines** (excluding blank lines); near the cap you must delete before adding. Content that still has long-term value but fails the root-file admission bar moves to `docs/` with a one-line reference (see Step 4). Rules that lost generality, were superseded, or duplicate others get deleted or merged.
+4. **Confirm before writing**: every write — updating `AGENTS.md`, agent memory, progress/status files, moving collected files — must be shown to the user and approved first. Without approval, propose only; touch nothing.
 
-## 工作流
+## Workflow
 
-### Step 1 收集教训
+### Step 1 Collect lessons
 
-从以下来源提取本次会话/任务中的经验教训：
+Extract lessons from this session/task:
 
-- 用户明确指出的错误、纠正、返工点（优先级最高）
-- 实际踩过的坑：报错、环境问题、错误的实现方式
-- 用户重复出现的偏好（出现 2 次以上才算，出现 1 次不写）
-- 验证有效的做法
+- Errors, corrections, and rework the user explicitly pointed out (highest priority)
+- Pitfalls actually hit: errors, environment issues, wrong approaches
+- User preferences that repeated (2+ occurrences; a single occurrence doesn't count)
+- Approaches that were validated to work
 
-排除以下内容：一次性任务细节、临时路径/参数、显而易见的常识、未经验证的猜测。
+Exclude: one-off task details, temporary paths/parameters, obvious common sense, unverified guesses.
 
-### Step 2 蒸馏规则
+### Step 2 Distill rules
 
-对每条教训做三道加工：
+Process each lesson in three passes:
 
-1. **泛化**：把具体案例提升为通用规则。"tsconfig.json 里 paths 别名配错导致 build 失败" → "修改路径别名后必须运行 `npm run build` 验证"。
-2. **压缩**：一条规则一行，格式为 `- 做什么（必要时附原因，原因不超过半行）`。例：`- 提交前必须通过 lint 和 test；CI 会拦截不合规提交`。
-3. **分类**：归入最贴近的章节（见模板的标准与可选章节）。均无法覆盖时才自建章节，且整份文件章节总数不超过 9 个。
+1. **Generalize**: raise the specific case into a general rule. "Wrong path alias in tsconfig.json broke the build" → "Run `npm run build` after changing path aliases".
+2. **Compress**: one rule per line, format `- do X (reason ≤ half a line if needed)`. Example: `- Commits must pass lint and tests; CI blocks non-compliant commits`.
+3. **Classify**: put it in the closest section (see the template's standard and optional sections). Only create a new section when nothing fits, and keep total sections ≤ 9.
 
-**准入门槛**：一条规则必须同时满足——(a) 未来大概率再遇到；(b) 违反会导致实际损失（返工/bug/时间浪费）；(c) 一行能说清。三者缺一，丢弃。
+**Admission bar**: a rule must pass all three — (a) likely to recur; (b) violating it causes real loss (rework/bugs/wasted time); (c) expressible in one line. Miss any one, discard.
 
-### Step 3 读取现状
+### Step 3 Read current state
 
-- 先按「场景适配」判定 coding / work 场景，后续步骤按对应列执行。
-- 检查项目根目录是否已有 AGENTS.md。
-- **已有**：通读全文，建立现有规则清单（逐条列出）。
-- **没有**：先自行初始化对该项目的认知，再生成 AGENTS.md：
-  1. 扫描项目结构、README、构建/依赖配置（package.json / pyproject.toml / Makefile / *.csproj 等）、CI 配置，识别技术栈、包管理器、构建与测试命令。
-  2. 结合本次会话已积累的经验教训，按 agents.md 规范生成首版 AGENTS.md（骨架参考 `assets/AGENTS-template.md`，成稿颗粒度参考 `assets/AGENTS-example.md`；章节应贴合该项目实际，标准与可选章节不适用的直接省略，不要留占位空条）。
-  3. **命令可执行验证**：首版写入的每条命令必须逐条验证——能实际运行的（build / test / lint 等）实跑确认；不便实跑的（如部署、迁移命令）与 package.json scripts / Makefile / CI 配置逐一核对，确认存在且拼写一致。跑不通、核对不上的命令不得写入。
-  4. 首版同样执行 Step 2 的准入门槛与精简要求，禁止为了"看起来完整"堆砌通用常识。
+- First detect the scenario: **coding** or **work** (a non-code collaboration directory). Later steps follow the matching column in Scenario Adaptation.
+- Check whether `AGENTS.md` exists in the project root.
+- **Exists**: read it fully and build a list of existing rules (enumerate every one).
+- **Missing**: build project understanding yourself, then generate the first `AGENTS.md`:
+  1. Scan project structure, README, build/dependency configs (`package.json` / `pyproject.toml` / `Makefile` / `*.csproj` …), and CI configs to identify the stack, package manager, build and test commands.
+  2. Combine with this session's lessons and generate the first version per the agents.md spec (skeleton: `assets/AGENTS-template.md`; granularity benchmark: `assets/AGENTS-example.md`). Omit standard/optional sections that don't apply — never leave empty placeholder sections. Keep section names in English (community convention); entry language follows the project's dominant language.
+  3. **Command verification**: every command written in the first version must be verified — run build/test/lint commands for real; commands impractical to run (deploy, migrations) must be cross-checked against `package.json` scripts / `Makefile` / CI configs for existence and exact spelling. Never write a command that fails or can't be verified.
+  4. Apply Step 2's admission bar and concision rules to the first version too. Piling up generic common sense "to look complete" is forbidden.
 
-### Step 4 有机合并（核心）
+### Step 4 Organic merge (core)
 
-对每条新规则，与现有清单逐一比对后执行下列操作之一，禁止无条件追加：
+For each new rule, compare against every existing rule and do exactly one of the following. Unconditional appending is forbidden:
 
-| 情况 | 动作 |
+| Situation | Action |
 |------|------|
-| 已有等价规则 | 丢弃新规则，不动文件 |
-| 与现有规则部分重叠 | 合并为一条更精确/更通用的表述 |
-| 是现有规则的特例 | 用通用版本替换现有规则（一条通用 > 三条特例） |
-| 与现有规则矛盾 | 保留新的（更新的实践），删除旧的 |
-| 现有规则明显过时（环境/工具已变） | 删除 |
-| 全新且通过准入门槛 | 追加到对应章节 |
+| Equivalent rule exists | Discard the new rule; touch nothing |
+| Partially overlaps | Merge into one more precise/more general statement |
+| Is a special case of an existing rule | Replace the existing rule with the general version (one general > three special cases) |
+| Contradicts an existing rule | Keep the new one (newer practice), delete the old |
+| Existing rule clearly outdated (env/tooling changed) | Delete |
+| New and passes the admission bar | Append to the matching section |
 
-**长度控制**：
-- 合并后总行数（不含空行）≤ 120 行。超过则从以下顺序削减：过时规则 → 重复/可合并项 → 通用性弱的特例 → 最少被触发的章节条目。
-- **削减 ≠ 一律删除**：被削减内容中仍有长期参考价值、只是不满足根文件准入门槛的（背景说明、操作细节、低频特例），迁往 `docs/<主题>.md`，并在 AGENTS.md 原位置留一行引用（如 `- 部署细节见 [docs/deploy.md](docs/deploy.md)`）；过时、重复内容直接删，不迁移。
-- 引用行宁缺毋滥：确有按需取用价值才留，每章至多 1–2 条，防 docs/ 变相撑大根文件。
-- 每个章节条目建议 ≤ 8 条；超出说明该章节在堆细节，应向下收敛。
+**Length control**:
+- After merging, total length (excluding blank lines) ≤ 120 lines. Over the cap, prune in this order: outdated rules → duplicates/mergeable items → low-generality special cases → entries in the least-triggered sections.
+- **Pruning ≠ always deleting**: pruned content that still has long-term reference value but fails the root-file admission bar (background, operational details, low-frequency special cases) moves to `docs/<topic>.md`, leaving a one-line reference in place (e.g. `- Deployment details: [docs/deploy.md](docs/deploy.md)`). Outdated and duplicate content is deleted outright, not migrated.
+- Reference lines are scarce by design: keep only when truly useful on demand, at most 1–2 per section, so `docs/` doesn't bloat the root file indirectly.
+- Aim for ≤ 8 entries per section; more means the section is accumulating details — converge downward.
 
-### Step 5 确认并写入
+### Step 5 Confirm and write
 
-- 向用户提交完整改动方案（必须包含）：
-  1. 拟新增规则（原文，含所在章节）
-  2. 拟合并/替换/删除的规则及理由
-  3. 拟迁移到 `docs/` 的内容、目标文件与根文件中的引用行（docs/ 写入同须批准）
-  4. 更新后的总行数与容量余量
-- **用户批准后**才用 Edit/Write 写入 AGENTS.md，保持原有其他章节内容不动；未批准前不得写文件。
+- Present the complete change plan to the user (must include):
+  1. Rules to add (verbatim, with target section)
+  2. Rules to merge/replace/delete, with reasons
+  3. Content to migrate to `docs/`, target files, and the reference line left in the root file (writing `docs/` also requires approval)
+  4. Updated total line count and remaining capacity
+- Write `AGENTS.md` **only after user approval**, using your file-editing tools; leave all other sections untouched. Never write files before approval.
 
-### Step 6 同步记忆与进度记录（条件执行）
+### Step 6 Sync memory and progress (conditional)
 
-- **agent 记忆**：若当前 agent 具备项目记忆机制（memory 文件/目录、brain 等），把本次沉淀的教训同步为项目记忆条目——遵循该 agent 自身的记忆格式，先查重再写入，不与已有记忆重复。
-- **进度/状态文件**：若项目存在进度或状态记录文件（如 TODO.md、CHANGELOG.md、PROGRESS.md、STATUS.md），按本次改动同步更新对应条目。
-- **同一死门槛**：写入前先列出拟更新的文件与内容摘要，经用户批准；未经批准不得写入。无记忆机制、无相关文件则跳过本步，不必提及。
+- **Agent memory**: if the current agent has a project memory mechanism (memory files/directories, brain, etc.), sync this session's lessons as project memory entries — follow the agent's own memory format, dedupe before writing.
+- **Progress/status files**: if the project tracks progress (TODO.md, CHANGELOG.md, PROGRESS.md, STATUS.md), update the relevant entries for this change.
+- **Same hard gate**: list the files to update and a content summary, and get user approval before writing. No memory mechanism or relevant files → skip silently, don't mention it.
 
-### Step 7 文档与数据归集（收尾可选）
+### Step 7 Collect docs and data (optional closing)
 
-AGENTS.md 写完后，检查项目中是否有散落的产出文件（未按主题归入子文件夹、直接堆在目录顶层的），按性质分组、各归其位：
+After `AGENTS.md` is written, check for scattered output files (not yet grouped by topic, dumped at the top level) and group each by nature:
 
-- **文档**（供人阅读：MD/HTML/PPT/PDF）→ `docs/<主题>/`
-- **数据文件**（机器可读：CSV/XLSX/JSON/SQL dump 等，含导出结果与数据集）→ `data/<主题>/`
+- **Documents** (for humans: MD/HTML/PPT/PDF) → `docs/<topic>/`
+- **Data files** (machine-readable: CSV/XLSX/JSON/SQL dumps, exported results, datasets) → `data/<topic>/`
 
-work 场景的归集方向与引用核查差异见「场景适配」。
+Work-scenario differences are in Scenario Adaptation.
 
-1. **先查引用，再出方案**：对每个候选文件先 grep 全项目（代码、脚本、构建/CI 配置），被引用的一律不动——移动会破坏运行；用途不明、难以判断是文档还是数据的，单独标出询问用户，不替用户判断。
-2. **只扫描，不动手**：列出清单（路径、性质、建议去向）供用户批准，可整体批准也可逐个取舍，允许"保持不动"。例外一律留根目录：项目配置文件（AGENTS.md / CLAUDE.md / skills-lock.json 等）、README、LICENSE。**用户未批准前，不得移动、重命名或修改任何文件。**
-3. **批准后执行**：移动文件 → 同步修正所有相对路径引用（MD/HTML 内的链接）→ grep 全项目验证无断链（含第 1 步查过的引用点）→ 汇报移动清单与引用修复结果。
+1. **Check references before proposing**: for each candidate file, grep the whole project first (code, scripts, build/CI configs). Referenced files never move — moving breaks things. Files whose nature is unclear (document or data?) get flagged for the user; don't decide for them.
+2. **Scan only, touch nothing**: present the list (path, nature, suggested destination) for approval — approve all or pick individually; "keep in place" is always allowed. Exceptions that stay in the root: project config files (`AGENTS.md` / `CLAUDE.md` / `skills-lock.json` …), `README`, `LICENSE`. **Never move, rename, or modify any file before the user approves.**
+3. **Execute after approval**: move files → fix every relative-path reference (links in MD/HTML) → grep the whole project to verify no broken links (covering the reference points from step 1) → report the move list and reference fixes.
 
-## 章节使用约定
+## Section conventions
 
-优先使用模板中的标准章节，语义对应关系：
+Prefer the template's standard sections; semantic mapping:
 
-- 构建/环境类教训 → `Build & Test Commands` 或 `Dev Environment Tips`
-- 代码风格、命名、目录结构 → `Code Style`
-- 工作流约束（提交、PR、分支） → `PR / Workflow Instructions`
-- 该项目特有的、反复出现的坑 → `Project-Specific Gotchas`
+- Build/environment lessons → `Build & Test Commands` or `Dev Environment Tips`
+- Code style, naming, structure → `Code Style`
+- Workflow constraints (commits, PRs, branches) → `PR / Workflow Instructions`
+- Project-specific recurring pitfalls → `Project-Specific Gotchas`
 
-可选章节仅在项目确有对应固定流程时使用，同样执行准入门槛，宁缺毋滥：
+Optional sections only when the project really has that fixed process; same admission bar applies, scarce by design:
 
-- 构建/发布产物、环境配置、部署命令、CI/CD 流程 → `Build & Deployment`
-- 密钥管理、权限模型、安全测试要求 → `Security Notes`
-- 高频报错排查路径、日志位置、调试入口 → `Debugging & Troubleshooting`
+- Build artifacts, env config, deploy commands, CI/CD → `Build & Deployment`
+- Secret handling, permission model, security test requirements → `Security Notes`
+- Frequent-error triage paths, log locations, debug entry points → `Debugging & Troubleshooting`
 
-**嵌套**：某条教训只适用于特定子目录时，不写入根文件——提示用户在该子目录单放局部 AGENTS.md（agent 处理该目录文件时以更近者为准），根文件只留全局适用内容。
+**Nesting**: a lesson that only applies to one subdirectory doesn't go in the root file — suggest a local `AGENTS.md` in that subdirectory (agents honor the nearest file when working there); the root keeps globally applicable content only.
 
-## 场景适配（coding / work）
+## Scenario adaptation (coding / work)
 
-Step 3 读取现状时先判定场景，两套场景工作流一致，仅三处不同：
+In Step 3, detect the scenario first. Both share one workflow; only three spots differ:
 
-- **判定**：项目含任一代码工程标志（package.json / pyproject.toml / Makefile / *.csproj / 源码目录 / CI 配置）→ coding；只有文档、表格、参考资料等产出物 → work（报告库、协作目录等）。
+- **Detection**: any code-project marker (package.json / pyproject.toml / Makefile / *.csproj / source dirs / CI config) → coding; only documents, spreadsheets, and reference material → work (report libraries, collaboration directories, etc.).
 
-| 环节 | coding | work |
+| Aspect | coding | work |
 |------|--------|------|
-| 首版扫描与核验 | 扫构建/依赖/CI 配置；命令逐条实跑或核对 | 扫 README、目录结构与命名惯例；无命令核验，改为核对文中引用路径真实存在 |
-| 章节语义 | Build & Test / Code Style / PR 规范 | 数据口径与来源时效、文件命名与归档、交付与复核流程；多数走自建章节，总数仍 ≤ 9 |
-| Step 7 归集与查引用 | 文档→`docs/`、数据→`data/`；grep 代码引用 | 成果文档→`docs/`、数据底稿→`data/`、参考资料→`references/`；查 MD/HTML 相对链接与 AGENTS.md 内路径 |
+| Initial scan & verification | Scan build/dependency/CI configs; run each command or cross-check it | Scan README, directory structure, naming conventions; no commands to verify — instead verify referenced paths exist |
+| Section semantics | Build & Test / Code Style / PR rules | Data definitions & source freshness, file naming & archiving, delivery & review process; mostly custom sections, still ≤ 9 total |
+| Step 7 collection & references | docs→`docs/`, data→`data/`; grep code references | Deliverables→`docs/`, data drafts→`data/`, reference material→`references/`; check MD/HTML relative links and paths inside AGENTS.md |
 
-## 参考资源
+## Reference resources
 
-- `references/agents-md-spec.md` — agents.md 规范要点摘要，首次为某项目创建 AGENTS.md 前必读。
-- `assets/AGENTS-template.md` — 章节结构参考骨架，生成首版时可参考，但须按项目实际裁剪，不得保留不适用的空章节。
-- `assets/AGENTS-example.md` — agents.md 官方真实成稿示例（pnpm/Turborepo monorepo），用于把握合格成稿的颗粒度与密度。
+- `references/agents-md-spec.md` — key points of the agents.md spec; required reading before creating an AGENTS.md for a project.
+- `assets/AGENTS-template.md` — section skeleton reference; prune to the project's reality, never keep empty sections that don't apply.
+- `assets/AGENTS-example.md` — the official agents.md example (pnpm/Turborepo monorepo); use it to calibrate the granularity and density of a good finished file.
 
-## 关于
+## About
 
-- 仓库与更新：[kelegele/agentsmd-skill](https://github.com/kelegele/agentsmd-skill)
-- 作者站点：[kelegele.com](https://kelegele.com)
+- Repo & updates: [kelegele/agentsmd-skill](https://github.com/kelegele/agentsmd-skill)
+- Author site: [kelegele.com](https://kelegele.com)
+- Chinese reference translation: [docs/zh-CN/SKILL.md](docs/zh-CN/SKILL.md) (for human readers; the agent loads this English file)

@@ -1,39 +1,39 @@
-# agents.md 规范要点摘要
+# agents.md Spec Summary
 
-来源：https://github.com/agentsmd/agents.md — "a simple, open format for guiding coding agents"
+Source: https://github.com/agentsmd/agents.md — "a simple, open format for guiding coding agents"
 
-## 定位
+## What it is
 
-AGENTS.md 是写给 AI coding agent 的"README"：一个专门的、可预测的位置，为 agent 提供项目上下文与指令。格式刻意保持极简——**没有必填 schema、没有强制字段**，就是一个 Markdown 文件。
+`AGENTS.md` is a "README for AI coding agents": a dedicated, predictable place that gives the agent project context and instructions. The format is deliberately minimal — **no required schema, no mandatory fields**, just a Markdown file.
 
-## 核心规范
+## Core spec
 
-1. **文件名**：必须为 `AGENTS.md`，放在仓库根目录。
-2. **格式**：纯 Markdown（与 README 相同的语法），agent 可以直接读取。
-3. **层级**：支持嵌套——子目录可以有自己的 AGENTS.md，处理该目录下的文件时以更近的 AGENTS.md 为准（更具体的指令优先于根级）。因此根级文件只放全局适用内容。
-4. **内容性质**：写"agent 不知道、但做了会出错"的内容——构建/测试命令、代码风格约定、项目特有陷阱、工作流规则。不写空泛愿景和自我介绍。
-5. **章节**：无官方强制章节，但社区约定俗成的高频章节为：
-   - `# Project Overview`（一两句项目说明）
+1. **Filename**: must be `AGENTS.md`, at the repository root.
+2. **Format**: plain Markdown (same syntax as README), directly readable by agents.
+3. **Nesting**: subdirectories may carry their own `AGENTS.md`; when working on files there, the nearest `AGENTS.md` wins (more specific instructions override root-level). Root file therefore holds globally applicable content only.
+4. **Content nature**: write "what the agent doesn't know but will get wrong" — build/test commands, code style conventions, project-specific pitfalls, workflow rules. No vague vision statements, no self-introductions.
+5. **Sections**: no officially mandated sections, but the community's high-frequency set is:
+   - `# Project Overview` (one or two sentences)
    - `## Dev Environment Tips`
    - `## Build & Test Commands`
    - `## Code Style`
    - `## Testing Instructions`
    - `## PR Instructions`
 
-   高频可选章节（项目确有对应固定流程时才写）：`## Build & Deployment`、`## Security Notes`、`## Debugging & Troubleshooting`。
-6. **写法风格**（来自官方 minimal example）：
-   - 祈使句、以 `- ` 列表项为主
-   - 命令直接给完整可执行形式（含包管理器前缀）
-   - 每条自带行动指令而非描述背景
-   - 总体篇幅短（官方示例全文 < 30 行）
+   High-frequency optional sections (only when the project really has that fixed process): `## Build & Deployment`, `## Security Notes`, `## Debugging & Troubleshooting`.
+6. **Style** (from the official minimal example):
+   - Imperative sentences, mostly `- ` list items
+   - Commands given in full executable form (including package-manager prefix)
+   - Each item is an action instruction, not background description
+   - Short overall (official example is < 30 lines)
 
-## 兼容性
+## Compatibility
 
-AGENTS.md 已被多家主流 coding agent（Codex、Cursor、Copilot 等）原生识别，等价于各家的项目级指令文件。
+`AGENTS.md` is natively recognized by major coding agents (Codex, Cursor, Copilot, …) as their project-level instruction file.
 
-## 对本 Skill 的约束映射
+## How this skill maps to the spec
 
-- 精简 → 每条一行祈使句，总行数 ≤ 120
-- 合规 → 章节名沿用社区高频章节（标准 + 可选），仅放全局适用内容
-- 不膨胀 → 嵌套机制说明：若某教训只适用于子目录，提示用户考虑在该子目录放局部 AGENTS.md，而不是撑大根文件；瘦身削减时，仍有长期参考价值的内容迁往 `docs/<主题>.md` 并在根文件一行按需引用，避免硬删丢知识
-- 可验证 → 首版写入的命令须实跑确认，或与构建/CI 配置逐一核对（见 SKILL.md Step 3）
+- Concise → one imperative line per rule, ≤ 120 lines total
+- Compliant → keep the community's high-frequency sections (standard + optional), globally applicable content only
+- No bloat → nesting guidance: a lesson that only applies to a subdirectory goes into a local `AGENTS.md` there instead of bloating the root; when slimming, content with long-term value migrates to `docs/<topic>.md` with a one-line reference rather than being hard-deleted
+- Verifiable → first-version commands must be run for real or cross-checked against build/CI configs (see SKILL.md Step 3)

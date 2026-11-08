@@ -2,6 +2,13 @@
 
 版本号：vMAJOR.MINOR.PATCH。MINOR 功能新增、PATCH 修订、MAJOR 架构级变更。
 
+## v1.5.2 - 2026-11-09
+
+### Changed
+
+- 英文化：SKILL.md 正文、`references/`、`assets/`、README 全部切换为英文默认（国际 Skills Hub 索引与审核友好）；中文参考译文收进 `docs/zh-CN/`（SKILL.md 与 README，仅供人阅读，不随技能包发布），双语 README 顶部互链
+- frontmatter `description` 改为双语：英文主句供 Hub 索引，保留中文触发短语，触发判据兼容中文会话
+
 ## v1.5.1 - 2026-11-09
 
 ### Added
