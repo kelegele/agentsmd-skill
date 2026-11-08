@@ -6,6 +6,7 @@
 - 任务：为 Flitnut（飞栗 AI）公众号写长文投稿推荐 agentsmd skill；读者定位 AI 编程工具用户；交付 Markdown 稿 + 公众号排版 HTML。
 - 2026-11-09：用户指出稿件此前未投到任何位置；已按 project-handoff-skill 的投稿目录惯例归档至 `docs/articles/`。
 - 2026-11-09：用户决定写作类事项（标题终选、排版风格、配图、发布跟进等）不在本项目处理；稿件产物原地保留不再跟进，后续写作在他处进行。
+- 2026-11-09：用户决定把 skill 收录进主流 Skills Hub（official Hermes/Nous、lobehub、skills.sh、clawhub）；browse.sh 核实定位不符（只收网站自动化技能）跳过；发布全程带 GitHub 仓库与 kelegele.com 引流；接受 ClawHub MIT-0 条款。
 
 ## 当前任务、状态和记录入口
 
@@ -16,6 +17,11 @@
 - 交接模式搭建：`scripts/agent_hook.py`（冒烟测试通过）、`.zcode/config.json`（--agent ZCode，python3=/usr/local/bin/python3）、`AGENTS.md` 已并入「多 Agent 交接」规则
 - README 特性升格（2026-11-09，用户批准）：记忆同步卖点（表格末行 + 七事⑥ + FAQ personal agent 条目）；CHANGELOG 加 Unreleased 条目；README 仓库结构加注
 - 真正的投稿动作：粘贴公众号后台仍需用户执行（agent 无法操作后台）
+- Skills Hub 收录（2026-11-09，任务记录 docs/execution/agent-runs/ZCode-df77f481ba25efc238e6/handover.md）：
+  - skills.sh 已收录（此前自动上榜）：https://www.skills.sh/kelegele/agentsmd-skill
+  - ClawHub 已公开 agentsmd@1.5.1：https://clawhub.ai/kelegele/agentsmd（MIT-0，同步出现在 Hermes 市场 clawhub/ 来源）
+  - Hermes 官方 Hub PR 待审核：NousResearch/hermes-agent#151512（optional-skills/software-development/agentsmd，英文版）
+  - v1.5.1 已发版（release v1.5.1，SKILL.md/README/CHANGELOG 三处同步；SKILL.md 与 README 均含 GitHub + kelegele.com 引流位）
 
 ## 未完成事项与下一步
 
@@ -23,3 +29,6 @@
 - Codex / QwenWork 钩子配置未安装（本会话仅确认使用 ZCode），需要时按模板补
 - 自动记录需新会话真实验证：本会话（2026-11-09 启动检查已完成，历史 2 条）结束时检查 `docs/execution/agent-runs/` 是否新增记录
 - 文章发布后：在本文件登记发布日期与标题终选
+- LobeHub 市场发布待用户网页操作：新技能创建仅网页端（lobehub.com/publish，网页登录后操作）；发布包在 /tmp/agentsmd-publish/agentsmd，`lhm` 已登录且 GitHub 已连接，完成后回填技能页链接
+- Hermes PR #151512 有结果后：登记 merge 或被拒原因；被拒则评估改投（如社区推广渠道）
+- 后续版本发布时：ClawHub（clawhub skill publish）、LobeHub（lhm skill publish，创建后可用）、skills.sh（随 GitHub 自动）三处随 CHANGELOG 同步升级
