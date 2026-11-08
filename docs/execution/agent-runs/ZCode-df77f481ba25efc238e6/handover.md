@@ -19,6 +19,7 @@
   - Hermes PR 待上游审核（curated 通道，可能被拒）
   - ClawHub 卡片 0 installs 属新发正常态
 - 下一步：用户完成 LobeHub /publish 后在本文件与 HANDOVER.md 回填技能页链接；PR 有结果（merge/拒）后登记；后续发版时三 Hub 随 CHANGELOG 同步升级
+- 收尾（2026-11-09，用户批准 all）：agentsmd skill 工作流跑毕，本次教训固化进 AGENTS.md——合并 git push 瞬时故障规则（补 HTTP/1.1 解法），新增市场同步发版、引流位保留、LobeHub claim 模型、ClawHub MIT-0 四条；现 19 行非空（上限 120）。落盘后 push 即复现瞬时故障并按新规则用 HTTP/1.1 解决（f4088bf），规则自证有效
 - 授权范围：按最新用户明确指令（四项动作 + 接受 MIT-0 + 引流要求），不因钩子扩大授权
 
 ## 追加：v1.5.2 全量英文化（同日第二轮，用户批准）
