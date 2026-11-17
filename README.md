@@ -42,7 +42,7 @@ Rather not install anything? Just paste the repo URL to your agent:
 | Approaching the 120-line cap | Content still worth keeping moves to `docs/<topic>.md` with a one-line reference — pruning removes redundancy, not memory |
 | A new project without AGENTS.md | Scans directory structure, README, and build/CI configs to generate one that fits; every command is run or cross-checked — nothing unverified gets written |
 | A lesson that only applies to one subdirectory | Sinks into a local AGENTS.md for that subdirectory; the root file keeps globally applicable content only |
-| A docs-only / data-only work directory (report library, collaboration space) | Auto-adapts: scans doc structure and naming conventions instead of build configs; rules lean toward data definitions, archiving, and delivery; collection adds `references/` as a destination |
+| A docs-only / data-only work directory (report library, collaboration space) | Auto-adapts: scans doc structure and naming conventions instead of build configs; rules lean toward data definitions, archiving, and delivery; collection relaxes the fixed buckets into a folder taxonomy that fits the work type |
 | Documents and data files scattered at the root | Checks code references before proposing: docs go to `docs/<topic>/`, data to `data/<topic>/`; files move only after approval, and every broken link gets fixed |
 | Memory, TODO / CHANGELOG of personal agents like Hermes / OpenClaw | Sediments project memory through the host's own mechanism — host format, dedupe first, approval before write; silently skips if there is none |
 
@@ -82,14 +82,14 @@ agentsmd goes the other way: **one sentence per rule**, **a hard 120-line cap**,
 4. **Organic merge**: a rule gets in only through the five gates; near 120 lines, delete before adding; valuable content migrates to `docs/`.
 5. **Confirm and write**: presents the complete change plan (adds / merges / deletes / migrations / line count); files are touched only after your approval.
 6. **Sync memory and progress**: rides the host, builds nothing new — if the agent has a memory mechanism, project memory settles in its format; TODO / CHANGELOG get updated too; no private memory formats, so it fits whichever agent it's installed in.
-7. **Collect docs and data** (optional): checks references before proposing — docs to `docs/`, data to `data/`, plus `references/` in work scenarios; files move and links get fixed only after approval.
+7. **Collect docs and data** (optional): checks references before proposing — docs to `docs/`, data to `data/` by default; work scenarios get a type-fitted taxonomy, recorded in AGENTS.md once approved; files move and links get fixed only after approval.
 
 ## What you end up with
 
 - An `AGENTS.md` **≤120 lines**, sections fitted to the project, no placeholder fluff
 - Migrated reference content in `docs/`, with one-line references in the root file
 - Updated agent project memory and progress files
-- A tidy, link-clean `docs/` (plus `data/`, `references/` per scenario)
+- A tidy, link-clean folder layout (`docs/`, `data/`, `references/` defaults; work scenarios a taxonomy fitted to the work type)
 
 ## Install
 
@@ -165,7 +165,7 @@ Yes. AGENTS.md follows the open [agents.md](https://agents.md/) spec — Claude 
 Yes. The skill is pure Markdown — no build, no dependencies, not tied to any CLI; if the agent has a memory mechanism, memories settle in its own format (dedupe first, approval before write); if not, it skips silently.
 
 **Non-code directories?**
-Yes. Once detected as a work scenario it adapts automatically: scanning shifts to doc structure and naming conventions, rules lean toward data definitions, archiving, and delivery, collection adds `references/` — the AGENTS.md format stays the same.
+Yes. Once detected as a work scenario it adapts automatically: scanning shifts to doc structure and naming conventions, rules lean toward data definitions, archiving, and delivery, and collection frees itself from the fixed `docs/ data/ references/` buckets — the agent proposes a folder taxonomy that fits the work type (approval still required, then recorded in AGENTS.md). The AGENTS.md format stays the same.
 
 **Will it touch files without my consent?**
 Never. Every write — AGENTS.md, memory, progress files, moving documents — is proposed first and executed only after approval.

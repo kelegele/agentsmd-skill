@@ -2,6 +2,15 @@
 
 版本号：vMAJOR.MINOR.PATCH。MINOR 功能新增、PATCH 修订、MAJOR 架构级变更。
 
+## v1.6.0 - 2026-11-18
+
+### Changed
+
+- work 场景归集放宽：`docs/ data/ references/` 三桶降为缺省建议（coding 场景不变），agent 可按 work 类型自定顶层子文件夹（如报告库用 `reports/`、`minutes/`），优先沿用目录既有结构与命名惯例；成果／底稿／参考三分法降为建议维度之一
+- 自定分类方案连同完整目录树进入既有审批流程（清单待批、批准后移动、修复断链均不变）；批准后把归档约定写入 AGENTS.md，后续会话沿用不再重定
+- 场景适配表 work 列归集行同步改写，表后新增「work 场景归集放宽」说明段
+- frontmatter `description` 归集措辞同步（fixed buckets for coding / work-type-fitted taxonomy for work，触发短语不动）；README 特性表、七件事⑦、交付物、FAQ 与 zh-CN 双语译文同步
+
 ## v1.5.2 - 2026-11-09
 
 ### Changed
