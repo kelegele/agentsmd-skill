@@ -18,7 +18,10 @@
 - 交接模式搭建：`scripts/agent_hook.py`（冒烟测试通过）、`.zcode/config.json`（--agent ZCode，python3=/usr/local/bin/python3）、`AGENTS.md` 已并入「多 Agent 交接」规则
 - README 特性升格（2026-11-09，用户批准）：记忆同步卖点（表格末行 + 七事⑥ + FAQ personal agent 条目）；CHANGELOG 加 Unreleased 条目；README 仓库结构加注
 - 真正的投稿动作：粘贴公众号后台仍需用户执行（agent 无法操作后台）
-- work 场景归集放宽（2026-11-18，用户批准）：SKILL.md v1.5.2→v1.6.0，三桶 `docs/ data/ references/` 降为 coding 缺省，work 可按类型自定顶层子文件夹（优先沿用既有惯例；批准后把归档约定写入 AGENTS.md 固化）；README 四处、zh-CN 双语、CHANGELOG 同步；本地安装副本 ~/.agents/skills/agentsmd 已从旧中文 v1.5.0 直接覆盖为仓库最新版（v1.6.0）；已 commit 未 push/发版，ClawHub/LobeHub/skills.sh 随下次发版流程同步
+- work 场景归集放宽（2026-11-18，用户批准）：SKILL.md v1.5.2→v1.6.0，三桶 `docs/ data/ references/` 降为 coding 缺省，work 可按类型自定顶层子文件夹（优先沿用既有惯例；批准后把归档约定写入 AGENTS.md 固化）；README 四处、zh-CN 双语、CHANGELOG 同步；本地安装副本 ~/.agents/skills/agentsmd 已从旧中文 v1.5.0 直接覆盖为仓库最新版（v1.6.0）。已 push + release v1.6.0（notes 取自 CHANGELOG）：
+  - skills.sh 随 GitHub 自动；ClawHub agentsmd@1.6.0 已提审（pending，过审后 latest 切 1.6.0）；误发新卡 agentsmd-skill@1.0.0（新版 CLI 缺 --slug 所致）已 `clawhub skill merge agentsmd-skill agentsmd` 收回并重定向
+  - LobeHub 已推（内部版本自增至 1.0.3，CLI 无版本旗标；卡片徽章按 11-09 经验跟随 GitHub release 爬取，待复检）；卡片标题显示为 zh-CN H1（含「中文参考译文」）为平台抓包逻辑所致，仅美观问题
+  - clawhub/lhm 两 CLI 已重装（npm i -g，clawhub@0.26.0 / @lobehub/market-cli@0.0.46）并写入 ~/.nvm/default-packages 防再丢失
 - Skills Hub 收录（2026-11-09，任务记录 docs/execution/agent-runs/ZCode-df77f481ba25efc238e6/handover.md）：
   - skills.sh 已收录（此前自动上榜）：https://www.skills.sh/kelegele/agentsmd-skill
   - ClawHub 已公开 agentsmd@1.5.1：https://clawhub.ai/kelegele/agentsmd（MIT-0，同步出现在 Hermes 市场 clawhub/ 来源）
